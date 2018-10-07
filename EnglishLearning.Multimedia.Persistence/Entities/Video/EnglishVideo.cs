@@ -10,6 +10,7 @@ namespace EnglishLearning.Multimedia.Persistence.Entities.Video
         
         public string ApiId { get; set; }
         public string Title { get; set; }
+        public string Transcription { get; set; }
         
         public string VideoType { get; set; }
         public EnglishLevel EnglishLevel { get; set; }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EnglishLearning.Multimedia.Persistence.Abstract
 {
-    public interface IMongoDbRepository<T> where T : IEntity
+    public interface IRepository<T> where T : IEntity
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> FindAsync(Expression<Func<T, bool>> filter);

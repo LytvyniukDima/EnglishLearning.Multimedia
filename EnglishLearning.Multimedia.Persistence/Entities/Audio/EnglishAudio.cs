@@ -13,8 +13,10 @@ namespace EnglishLearning.Multimedia.Persistence.Entities.Audio
         public string Tittle { get; set; }
         public int Duration { get; set; }
         public Uri Uri { get; set; }
+        public string Transcription { get; set; }
         
         public string AudioType { get; set; }
         public EnglishLevel EnglishLevel { get; set; }
+        public AudioPlayerType AudioPlayerType { get; set; }
     }
 }
