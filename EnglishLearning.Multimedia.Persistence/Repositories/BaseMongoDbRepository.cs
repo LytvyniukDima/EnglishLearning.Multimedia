@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using EnglishLearning.Multimedia.Persistence.Abstract;
@@ -8,7 +9,7 @@ using MongoDB.Driver;
 
 namespace EnglishLearning.Multimedia.Persistence.Repositories
 {
-    public abstract class BaseMongoDbRepository<T> : IRepository<T>, IPaginatedRepository<T> where T : IEntity
+    public abstract class BaseMongoDbRepository<T> : IRepository<T> where T : IEntity
     {
         protected readonly IMultimediaDbContext _dbContext;
         protected readonly IMongoCollection<T> _collection;
@@ -56,16 +57,15 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories
             DeleteResult actionResult = await _collection.DeleteManyAsync(_ => true);
             return actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
         }
-
-
-        public async Task<PageEntity<T>> GetPagenatedAsync(string lastId, int countPerPage)
+        
+        public virtual async Task<PageEntity<T>> GetPagenatedAsync(string lastId, int countPerPage)
         {
             var page = new PageEntity<T>();
             
             if (String.IsNullOrEmpty(lastId))
             {
                 page.Entities = await _collection.Find(_ => true).Limit(countPerPage).ToListAsync();
-                page.CountOfPages = (int)(_collection.Find(_ => true).Count() / countPerPage);
+                page.CountOfPages = (int)((await _collection.CountAsync()) / countPerPage);
             }
             else
             {
@@ -76,9 +76,24 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories
             return page;
         }
 
-        public async Task<PageEntity<T>> FindPagenatedAsync(Expression<Func<T, bool>> filter, string lastId, int countPerPage)
+        public virtual async Task<PageEntity<T>> FindPagenatedAsync(Expression<Func<T, bool>> filter, string lastId, int countPerPage)
         {
+            var page = new PageEntity<T>();
 
+            if (String.IsNullOrEmpty(lastId))
+            {
+                page.Entities = await _collection.Find(filter).Limit(countPerPage).ToListAsync();
+                page.CountOfPages = (int) (_collection.Find(filter).Count() / countPerPage);
+            }
+            else
+            {   
+                var buildedFilter = Builders<T>.Filter;
+                var mongoFilter = buildedFilter.Where(filter) & buildedFilter.Gt("Id", lastId);
+                
+                page.Entities = await _collection.Find(mongoFilter).Limit(countPerPage).ToListAsync();
+            }
+
+            return page;
         }
     }
 }

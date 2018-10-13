@@ -14,5 +14,7 @@ namespace EnglishLearning.Multimedia.Persistence.Abstract
         Task<bool> DeleteAsync(Expression<Func<T, bool>> filter);
         Task<bool> UpdateAsync(string id, T item);
         Task<bool> DeleteAllAsync();
+        Task<PageEntity<T>> GetPagenatedAsync(string lastId, int countPerPage);
+        Task<PageEntity<T>> FindPagenatedAsync(Expression<Func<T, bool>> filter, string lastId, int countPerPage);
     }
 }
