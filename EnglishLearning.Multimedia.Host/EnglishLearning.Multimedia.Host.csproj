@@ -8,4 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnglishLearning.Multimedia.Web\EnglishLearning.Multimedia.Web.csproj" />
+  </ItemGroup>
 </Project>
