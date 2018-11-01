@@ -65,7 +65,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories
             if (String.IsNullOrEmpty(lastId))
             {
                 page.Entities = await _collection.Find(_ => true).Limit(countPerPage).ToListAsync();
-                page.CountOfPages = (int)((await _collection.CountAsync()) / countPerPage);
+                page.CountOfPages = (int)((await _collection.CountDocumentsAsync(new BsonDocument())) / countPerPage);
             }
             else
             {
