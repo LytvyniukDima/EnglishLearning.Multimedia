@@ -9,11 +9,13 @@ using MongoDB.Driver;
 
 namespace EnglishLearning.Multimedia.Persistence.Repositories
 {
-    public abstract class BaseMongoDbRepository<T> : IRepository<T> where T : IEntity
+    public abstract class BaseMongoDbRepository<T, TInfo> : IRepository<T, TInfo> where T : IEntity where TInfo : IEntity
     {
         protected readonly IMultimediaDbContext _dbContext;
         protected readonly IMongoCollection<T> _collection;
-
+        
+        protected abstract ProjectionDefinition<T, TInfo> TInfoProjection { get; }
+        
         protected BaseMongoDbRepository(IMultimediaDbContext dbContext, string collectionName)
         {
             _dbContext = dbContext;
@@ -35,12 +37,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories
             return await _collection.Find(filter).ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> FindAllAsync(FilterDefinition<T> filter)
+        {
+            return await _collection.Find(filter).ToListAsync();
+        }
+
         public virtual async Task AddAsync(T item)
         {
             await _collection.InsertOneAsync(item);
         }
 
         public virtual async Task<bool> DeleteAsync(Expression<Func<T, bool>> filter)
+        {
+            DeleteResult actionResult = await _collection.DeleteManyAsync(filter);
+            return actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
+        }
+
+        public async Task<bool> DeleteAsync(FilterDefinition<T> filter)
         {
             DeleteResult actionResult = await _collection.DeleteManyAsync(filter);
             return actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
@@ -91,6 +104,96 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories
                 var mongoFilter = buildedFilter.Where(filter) & buildedFilter.Gt("Id", lastId);
                 
                 page.Entities = await _collection.Find(mongoFilter).Limit(countPerPage).ToListAsync();
+            }
+
+            return page;
+        }
+
+        public async Task<PageEntity<T>> FindPagenatedAsync(FilterDefinition<T> filter, string lastId, int countPerPage)
+        {
+            var page = new PageEntity<T>();
+
+            if (String.IsNullOrEmpty(lastId))
+            {
+                page.Entities = await _collection.Find(filter).Limit(countPerPage).ToListAsync();
+                page.CountOfPages = (int) (_collection.Find(filter).CountDocuments() / countPerPage);
+            }
+            else
+            {   
+                var buildedFilter = Builders<T>.Filter;
+                var mongoFilter = filter & buildedFilter.Gt("Id", lastId);
+                
+                page.Entities = await _collection.Find(mongoFilter).Limit(countPerPage).ToListAsync();
+            }
+
+            return page;
+        }
+
+        public async Task<IEnumerable<TInfo>> GetAllInfoAsync()
+        {
+            return await _collection
+                .Find(new BsonDocument())
+                .Project(TInfoProjection)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TInfo>> FindAllInfoAsync(FilterDefinition<T> filter)
+        {
+            return await _collection
+                .Find(filter)
+                .Project(TInfoProjection)
+                .ToListAsync();
+        }
+
+        public async Task<PageEntity<TInfo>> GetPagenatedInfoAsync(string lastId, int countPerPage)
+        {
+            var page = new PageEntity<TInfo>();
+            
+            if (String.IsNullOrEmpty(lastId))
+            {
+                page.Entities = await _collection
+                    .Find(new BsonDocument())
+                    .Limit(countPerPage)
+                    .Project(TInfoProjection)
+                    .ToListAsync();
+                page.CountOfPages = (int)((await _collection.CountDocumentsAsync(new BsonDocument())) / countPerPage);
+            }
+            else
+            {
+                var idFilter = new BsonDocument("Id", new BsonDocument("$gt", lastId));
+                page.Entities = await _collection
+                    .Find(idFilter)
+                    .Limit(countPerPage)
+                    .Project(TInfoProjection)
+                    .ToListAsync();
+            }
+
+            return page;
+        }
+
+        public async Task<PageEntity<TInfo>> FindPagenatedInfoAsync(FilterDefinition<T> filter, string lastId, int countPerPage)
+        {
+            var page = new PageEntity<TInfo>();
+
+            if (String.IsNullOrEmpty(lastId))
+            {
+                page.Entities = await _collection
+                    .Find(filter)
+                    .Limit(countPerPage)
+                    .Project(TInfoProjection)
+                    .ToListAsync();
+                page.CountOfPages = (int) (_collection.Find(filter).CountDocuments() / countPerPage);
+            }
+            else
+            {   
+                var buildedFilter = Builders<T>.Filter;
+                var mongoFilter = filter & buildedFilter.Gt("Id", lastId);
+                
+                page.Entities = await _collection
+                    .Find(mongoFilter)
+                    .Limit(countPerPage)
+                    .Project(TInfoProjection)
+                    .ToListAsync();
             }
 
             return page;

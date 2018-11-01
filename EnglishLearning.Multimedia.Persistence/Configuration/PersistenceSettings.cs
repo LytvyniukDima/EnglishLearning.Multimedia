@@ -19,9 +19,9 @@ namespace EnglishLearning.Multimedia.Persistence.Configuration
 
             services.AddScoped<IMultimediaDbContext, MultimediaDbContext>();
             
-            services.AddTransient<IRepository<EnglishAudio>, EnglishAudioMongoRepository>();
-            services.AddTransient<IRepository<EnglishText>, EnglishTextMongoRepository>();
-            services.AddTransient<IRepository<EnglishVideo>, EnglishVideoMongoRepository>();
+            services.AddTransient<IEnglishAudioRepository, EnglishAudioMongoRepository>();
+            services.AddTransient<IEnglishTextRepository, EnglishTextMongoRepository>();
+            services.AddTransient<IEnglishVideoRepository, EnglishVideoMongoRepository>();
             
             return services;
         }
