@@ -1,19 +1,21 @@
 ﻿using EnglishLearning.Multimedia.Persistence.Abstract;
 using EnglishLearning.Multimedia.Persistence.Entities.Video;
+using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
+using EnglishLearning.Utilities.Persistence.Mongo.Repositories;
 using MongoDB.Driver;
 
 namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
 {
-    public class EnglishVideoMongoRepository : BaseMongoDbRepository<EnglishVideo, EnglishVideoInfo>, IEnglishVideoRepository
+    public class EnglishVideoMongoRepository : BaseStringIdWithInfoModelRepository<EnglishVideo, EnglishVideoInfo>, IEnglishVideoRepository
     {
         private const string collectionName = "EnglishMultimedia_EnglishVideo";
 
-        public EnglishVideoMongoRepository(IMultimediaDbContext dbContext) : base(dbContext, collectionName)
+        public EnglishVideoMongoRepository(IMongoContext dbContext) : base(dbContext, collectionName)
         {
             
         }
 
-        protected override ProjectionDefinition<EnglishVideo, EnglishVideoInfo> TInfoProjection
+        protected override ProjectionDefinition<EnglishVideo, EnglishVideoInfo> InfoModelProjectionDefinition
         {
             get => Builders<EnglishVideo>
                 .Projection

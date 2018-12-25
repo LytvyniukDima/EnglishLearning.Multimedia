@@ -6,6 +6,8 @@ using EnglishLearning.Multimedia.Persistence.Entities.Video;
 using EnglishLearning.Multimedia.Persistence.Repositories.Audio;
 using EnglishLearning.Multimedia.Persistence.Repositories.Text;
 using EnglishLearning.Multimedia.Persistence.Repositories.Video;
+using EnglishLearning.Utilities.Configurations.MongoConfiguration;
+using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,9 +17,9 @@ namespace EnglishLearning.Multimedia.Persistence.Configuration
     {
         public static IServiceCollection PersistenceConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<MongoDbConfiguration>(configuration.GetSection("MongoDbConfiguration"));
+            services.AddMongoConfiguration(configuration);
 
-            services.AddScoped<IMultimediaDbContext, MultimediaDbContext>();
+            services.AddScoped<IMongoContext, MultimediaDbContext>();
             
             services.AddTransient<IEnglishAudioRepository, EnglishAudioMongoRepository>();
             services.AddTransient<IEnglishTextRepository, EnglishTextMongoRepository>();
