@@ -1,7 +1,6 @@
 ﻿using EnglishLearning.Multimedia.Persistence.Abstract;
-using EnglishLearning.Multimedia.Persistence.Contexts;
 using EnglishLearning.Multimedia.Persistence.Entities.Audio;
-using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
+using EnglishLearning.Utilities.Persistence.Mongo.Contexts;
 using EnglishLearning.Utilities.Persistence.Mongo.Repositories;
 using MongoDB.Driver;
 
@@ -11,7 +10,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
     {
         private const string collectionName = "EnglishMultimedia_EnglishAudio";
 
-        public EnglishAudioMongoRepository(IMongoContext dbContext) : base(dbContext, collectionName)
+        public EnglishAudioMongoRepository(MongoContext dbContext) : base(dbContext, collectionName)
         {
             
         }

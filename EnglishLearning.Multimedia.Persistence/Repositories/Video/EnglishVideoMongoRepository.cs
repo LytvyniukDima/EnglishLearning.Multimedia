@@ -1,6 +1,6 @@
 ﻿using EnglishLearning.Multimedia.Persistence.Abstract;
 using EnglishLearning.Multimedia.Persistence.Entities.Video;
-using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
+using EnglishLearning.Utilities.Persistence.Mongo.Contexts;
 using EnglishLearning.Utilities.Persistence.Mongo.Repositories;
 using MongoDB.Driver;
 
@@ -10,7 +10,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
     {
         private const string collectionName = "EnglishMultimedia_EnglishVideo";
 
-        public EnglishVideoMongoRepository(IMongoContext dbContext) : base(dbContext, collectionName)
+        public EnglishVideoMongoRepository(MongoContext dbContext) : base(dbContext, collectionName)
         {
             
         }
