@@ -1,7 +1,6 @@
 ﻿using EnglishLearning.Multimedia.Persistence.Abstract;
 using EnglishLearning.Multimedia.Persistence.Entities.Text;
 using EnglishLearning.Utilities.Persistence.Mongo.Contexts;
-using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
 using EnglishLearning.Utilities.Persistence.Mongo.Repositories;
 using MongoDB.Driver;
 
