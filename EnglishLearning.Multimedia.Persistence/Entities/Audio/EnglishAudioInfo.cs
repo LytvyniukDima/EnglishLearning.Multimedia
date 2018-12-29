@@ -13,7 +13,9 @@ namespace EnglishLearning.Multimedia.Persistence.Entities.Audio
         public int Duration { get; set; }
         
         public string AudioType { get; set; }
+        [BsonRepresentation(BsonType.String)]
         public EnglishLevel EnglishLevel { get; set; }
+        [BsonRepresentation(BsonType.String)]
         public AudioPlayerType AudioPlayerType { get; set; }
     }
 }

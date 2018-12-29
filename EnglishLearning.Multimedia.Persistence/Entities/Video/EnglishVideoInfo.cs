@@ -12,6 +12,7 @@ namespace EnglishLearning.Multimedia.Persistence.Entities.Video
         public string Title { get; set; }
         
         public string VideoType { get; set; }
+        [BsonRepresentation(BsonType.String)]
         public EnglishLevel EnglishLevel { get; set; }
     }
 }

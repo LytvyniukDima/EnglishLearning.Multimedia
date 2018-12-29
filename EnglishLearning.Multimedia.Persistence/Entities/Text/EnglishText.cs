@@ -13,6 +13,7 @@ namespace EnglishLearning.Multimedia.Persistence.Entities.Text
         public string HeadLine { get; set; }
         
         public string TextType { get; set; }
+        [BsonRepresentation(BsonType.String)]
         public EnglishLevel EnglishLevel { get; set; }
     }
 }
