@@ -1,4 +1,7 @@
-﻿using EnglishLearning.Multimedia.Persistence.Abstract;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EnglishLearning.Multimedia.Persistence.Abstract;
+using EnglishLearning.Multimedia.Persistence.Entities;
 using EnglishLearning.Multimedia.Persistence.Entities.Text;
 using EnglishLearning.Utilities.Persistence.Mongo.Contexts;
 using EnglishLearning.Utilities.Persistence.Mongo.Repositories;
@@ -26,6 +29,40 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
                     TextType = x.TextType,
                     EnglishLevel = x.EnglishLevel
                 });
+        }
+
+        public async Task<IReadOnlyList<EnglishText>> FindAllByPhrase(string phrase)
+        {
+            return await _collection.Find(x => x.HeadLine.Contains(phrase) || x.Text.Contains(phrase)).ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<EnglishText>> FindAllByFilters(string[] textTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishText>.Filter;
+            var filter = builder.In(x => x.TextType, textTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels);
+            
+            return await _collection.Find(filter).ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<EnglishTextInfo>> FindAllInfoByPhrase(string phrase)
+        {
+            return await _collection
+                .Find(x => x.HeadLine.Contains(phrase) || x.Text.Contains(phrase))
+                .Project(InfoModelProjectionDefinition)    
+                .ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<EnglishTextInfo>> FindAllInfoByFilters(string[] textTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishText>.Filter;
+            var filter = builder.In(x => x.TextType, textTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels);
+            
+            return await _collection
+                .Find(filter)
+                .Project(InfoModelProjectionDefinition)
+                .ToListAsync();
         }
     }
 }
