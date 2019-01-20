@@ -11,9 +11,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
 {
     public class EnglishVideoMongoRepository : BaseStringIdWithInfoModelRepository<EnglishVideo, EnglishVideoInfo>, IEnglishVideoRepository
     {
-        private const string collectionName = "EnglishMultimedia_EnglishVideo";
-
-        public EnglishVideoMongoRepository(MongoContext dbContext) : base(dbContext, collectionName)
+        public EnglishVideoMongoRepository(MongoContext dbContext) : base(dbContext)
         {
             
         }
@@ -45,6 +43,17 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
             return await _collection.Find(filter).ToListAsync();
         }
 
+        public async Task<IReadOnlyList<EnglishVideo>> FindAllByFilters(string phrase, string[] videoTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishVideo>.Filter;
+            var filter = builder.In(x => x.VideoType, videoTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels) & 
+                         builder.Or(Builders<EnglishVideo>.Filter.Regex(x => x.Title, phrase), 
+                             Builders<EnglishVideo>.Filter.Regex(x => x.Transcription, phrase));
+            
+            return await _collection.Find(filter).ToListAsync();
+        }
+
         public async Task<IReadOnlyList<EnglishVideoInfo>> FindAllInfoByPhrase(string phrase)
         {
             return await _collection
@@ -58,6 +67,20 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
             var builder = Builders<EnglishVideo>.Filter;
             var filter = builder.In(x => x.VideoType, videoTypes) &
                          builder.In(x => x.EnglishLevel, englishLevels);
+            
+            return await _collection
+                .Find(filter)
+                .Project(InfoModelProjectionDefinition)
+                .ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<EnglishVideoInfo>> FindAllInfoByFilters(string phrase, string[] videoTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishVideo>.Filter;
+            var filter = builder.In(x => x.VideoType, videoTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels) & 
+                         builder.Or(Builders<EnglishVideo>.Filter.Regex(x => x.Title, phrase), 
+                             Builders<EnglishVideo>.Filter.Regex(x => x.Transcription, phrase));
             
             return await _collection
                 .Find(filter)

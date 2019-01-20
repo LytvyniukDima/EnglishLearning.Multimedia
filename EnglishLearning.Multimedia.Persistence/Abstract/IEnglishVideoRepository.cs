@@ -10,7 +10,9 @@ namespace EnglishLearning.Multimedia.Persistence.Abstract
     {
         Task<IReadOnlyList<EnglishVideo>> FindAllByPhrase(string phrase);
         Task<IReadOnlyList<EnglishVideo>> FindAllByFilters(string[] videoTypes, EnglishLevel[] englishLevels);
+        Task<IReadOnlyList<EnglishVideo>> FindAllByFilters(string phrase, string[] videoTypes, EnglishLevel[] englishLevels);
         Task<IReadOnlyList<EnglishVideoInfo>> FindAllInfoByPhrase(string phrase);
         Task<IReadOnlyList<EnglishVideoInfo>> FindAllInfoByFilters(string[] videoTypes, EnglishLevel[] englishLevels);
+        Task<IReadOnlyList<EnglishVideoInfo>> FindAllInfoByFilters(string phrase, string[] videoTypes, EnglishLevel[] englishLevels);
     }
 }

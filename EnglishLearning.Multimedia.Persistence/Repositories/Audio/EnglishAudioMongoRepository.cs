@@ -11,9 +11,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
 {
     public class EnglishAudioMongoRepository : BaseStringIdWithInfoModelRepository<EnglishAudio, EnglishAudioInfo>, IEnglishAudioRepository
     {
-        private const string collectionName = "EnglishMultimedia_EnglishAudio";
-
-        public EnglishAudioMongoRepository(MongoContext dbContext) : base(dbContext, collectionName)
+        public EnglishAudioMongoRepository(MongoContext dbContext) : base(dbContext)
         {
             
         }
@@ -48,6 +46,17 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
             return await _collection.Find(filter).ToListAsync();
         }
 
+        public async Task<IReadOnlyList<EnglishAudio>> FindAllByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishAudio>.Filter;
+            var filter = builder.In(x => x.AudioType, audioTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels) &
+                         builder.Or(Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase), 
+                             Builders<EnglishAudio>.Filter.Regex(x => x.Transcription, phrase));
+            
+            return await _collection.Find(filter).ToListAsync(); 
+        }
+
         public async Task<IReadOnlyList<EnglishAudioInfo>> FindAllInfoByPhrase(string phrase)
         {
             return await _collection
@@ -61,6 +70,19 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
             var builder = Builders<EnglishAudio>.Filter;
             var filter = builder.In(x => x.AudioType, audioTypes) &
                 builder.In(x => x.EnglishLevel, englishLevels);
+            
+            return await _collection
+                .Find(filter)
+                .Project(InfoModelProjectionDefinition)
+                .ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<EnglishAudioInfo>> FindAllInfoByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishAudio>.Filter;
+            var filter = builder.In(x => x.AudioType, audioTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels) &
+                         builder.Or(Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase), Builders<EnglishAudio>.Filter.Regex(x => x.Transcription, phrase));
             
             return await _collection
                 .Find(filter)

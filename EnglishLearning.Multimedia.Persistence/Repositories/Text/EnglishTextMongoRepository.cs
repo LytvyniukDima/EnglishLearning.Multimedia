@@ -11,9 +11,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
 {
     public class EnglishTextMongoRepository : BaseStringIdWithInfoModelRepository<EnglishText, EnglishTextInfo>, IEnglishTextRepository
     {
-        private const string collectionName = "EnglishMultimedia_EnglishText";
-
-        public EnglishTextMongoRepository(MongoContext dbContext) : base(dbContext, collectionName)
+        public EnglishTextMongoRepository(MongoContext dbContext) : base(dbContext)
         {
             
         }
@@ -45,6 +43,17 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
             return await _collection.Find(filter).ToListAsync();
         }
 
+        public async Task<IReadOnlyList<EnglishText>> FindAllByFilters(string phrase, string[] textTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishText>.Filter;
+            var filter = builder.In(x => x.TextType, textTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels) & 
+                         builder.Or(Builders<EnglishText>.Filter.Regex(x => x.HeadLine, phrase), 
+                             Builders<EnglishText>.Filter.Regex(x => x.Text, phrase));;
+            
+            return await _collection.Find(filter).ToListAsync();
+        }
+
         public async Task<IReadOnlyList<EnglishTextInfo>> FindAllInfoByPhrase(string phrase)
         {
             return await _collection
@@ -58,6 +67,20 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
             var builder = Builders<EnglishText>.Filter;
             var filter = builder.In(x => x.TextType, textTypes) &
                          builder.In(x => x.EnglishLevel, englishLevels);
+            
+            return await _collection
+                .Find(filter)
+                .Project(InfoModelProjectionDefinition)
+                .ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<EnglishTextInfo>> FindAllInfoByFilters(string phrase, string[] textTypes, EnglishLevel[] englishLevels)
+        {
+            var builder = Builders<EnglishText>.Filter;
+            var filter = builder.In(x => x.TextType, textTypes) &
+                         builder.In(x => x.EnglishLevel, englishLevels) & 
+                         builder.Or(Builders<EnglishText>.Filter.Regex(x => x.HeadLine, phrase), 
+                             Builders<EnglishText>.Filter.Regex(x => x.Text, phrase));
             
             return await _collection
                 .Find(filter)
