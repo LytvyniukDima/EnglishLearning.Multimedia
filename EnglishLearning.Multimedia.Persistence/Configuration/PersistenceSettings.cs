@@ -43,6 +43,10 @@ namespace EnglishLearning.Multimedia.Persistence.Configuration
             services.AddTransient<IEnglishAudioRepository, EnglishAudioMongoRepository>();
             services.AddTransient<IEnglishTextRepository, EnglishTextMongoRepository>();
             services.AddTransient<IEnglishVideoRepository, EnglishVideoMongoRepository>();
+
+            services.AddTransient<IEnglishAudioFiltersRepository, EnglishAudioFilterRepository>();
+            services.AddTransient<IEnglishTextFiltersRepository, EnglishTextFilterRepository>();
+            services.AddTransient<IEnglishVideoFiltersRepository, EnglishVideoFilterRepository>();
             
             return services;
         }
