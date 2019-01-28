@@ -5,7 +5,4 @@
   <ItemGroup>
     <ProjectReference Include="..\EnglishLearning.Multimedia.Persistence\EnglishLearning.Multimedia.Persistence.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\InfoDTOs" />
-  </ItemGroup>
 </Project>

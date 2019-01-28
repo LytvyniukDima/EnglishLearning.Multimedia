@@ -3,6 +3,7 @@
     public enum AudioPlayerType
     {
         YouTube,
-        SoundCloud
+        SoundCloud,
+        MediaPlayer
     }
 }

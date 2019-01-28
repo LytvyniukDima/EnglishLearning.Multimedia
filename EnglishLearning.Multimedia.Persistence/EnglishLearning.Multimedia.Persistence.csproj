@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EnglishLearning.Utilities.Persistence.Mongo" Version="1.0.9" />
+    <PackageReference Include="EnglishLearning.Utilities.Persistence.Mongo" Version="1.1.0-CI-20190127-155336" />
     <PackageReference Include="Microsoft.Extensions.Configuration">
       <Version>2.1.1</Version>
     </PackageReference>
