@@ -9,8 +9,8 @@ namespace EnglishLearning.Multimedia.Application.Abstract
 {
     public interface IAudioService
     {
-        Task CreateAsync(EnglishAudioCreateModel englishTaskCreateModel);
-        Task<bool> UpdateAsync(string id, EnglishAudioCreateModel englishTaskModel);
+        Task CreateAsync(EnglishAudioCreateModel englishAudioCreateModel);
+        Task<bool> UpdateAsync(string id, EnglishAudioModel englishAudioModel);
         Task<EnglishAudioModel> GetByIdAsync(string id);
         Task<IReadOnlyList<EnglishAudioModel>> GetAllAsync();
         Task<bool> DeleteByIdAsync(string id);

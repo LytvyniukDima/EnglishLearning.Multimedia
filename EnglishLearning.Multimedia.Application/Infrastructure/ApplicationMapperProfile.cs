@@ -32,6 +32,7 @@ namespace EnglishLearning.Multimedia.Application.Infrastructure
             
             CreateMap<EnglishAudio, EnglishAudioModel>();
             CreateMap<EnglishAudioModel, EnglishAudio>();
+            CreateMap<EnglishAudio, EnglishAudioInfoModel>();
             
             CreateMap<EnglishAudioFullFilter, EnglishAudioFullFilterModel>();
             CreateMap<EnglishAudioFullFilterModel, EnglishAudioFullFilter>();
@@ -49,6 +50,7 @@ namespace EnglishLearning.Multimedia.Application.Infrastructure
             
             CreateMap<EnglishText, EnglishTextModel>();
             CreateMap<EnglishTextModel, EnglishText>();
+            CreateMap<EnglishText, EnglishTextInfoModel>();
             
             CreateMap<EnglishTextFullFilter, EnglishTextFullFilterModel>();
             CreateMap<EnglishTextFullFilterModel, EnglishTextFullFilter>();
@@ -66,6 +68,7 @@ namespace EnglishLearning.Multimedia.Application.Infrastructure
             
             CreateMap<EnglishVideo, EnglishVideoModel>();
             CreateMap<EnglishVideoModel, EnglishVideo>();
+            CreateMap<EnglishVideo, EnglishVideoInfoModel>();
             
             CreateMap<EnglishVideoFullFilter, EnglishVideoFullFilterModel>();
             CreateMap<EnglishVideoFullFilterModel, EnglishVideoFullFilter>();

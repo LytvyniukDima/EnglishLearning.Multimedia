@@ -9,8 +9,8 @@ namespace EnglishLearning.Multimedia.Application.Abstract
 {
     public interface ITextService
     {
-        Task CreateAsync(EnglishTextCreateModel englishTaskCreateModel);
-        Task<bool> UpdateAsync(string id, EnglishTextCreateModel englishTaskModel);
+        Task CreateAsync(EnglishTextCreateModel englishTextCreateModel);
+        Task<bool> UpdateAsync(string id, EnglishTextModel englishTextModel);
         Task<EnglishTextModel> GetByIdAsync(string id);
         Task<IReadOnlyList<EnglishTextModel>> GetAllAsync();
         Task<bool> DeleteByIdAsync(string id);
