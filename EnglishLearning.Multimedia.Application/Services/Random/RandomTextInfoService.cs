@@ -1,52 +1,94 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using EnglishLearning.Multimedia.Application.Abstract;
 using EnglishLearning.Multimedia.Application.Abstract.Random;
 using EnglishLearning.Multimedia.Application.Models.Enums;
 using EnglishLearning.Multimedia.Application.Models.InfoModels;
+using EnglishLearning.Utilities.Linq.Extensions;
 
 namespace EnglishLearning.Multimedia.Application.Services.Random
 {
     public class RandomTextInfoService : IRandomTextInfoService
     {
+        private readonly ITextService _textService;
+        
+        public RandomTextInfoService(ITextService textService)
+        {
+            _textService = textService;
+        }
+        
         public async Task<EnglishTextInfoModel> GetRandomInfoFromAllAsync()
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.GetAllInfoAsync();
+            if (!englishTexts.Any())
+                return null;
+
+            return englishTexts.GetRandomElement();
         }
 
-        public async Task<EnglishTextInfoModel> FindRandomInfoByPhraseAsync(int amount, string phrase)
+        public async Task<EnglishTextInfoModel> FindRandomInfoByPhraseAsync(string phrase)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.FindAllInfoByPhrase(phrase);
+            if (!englishTexts.Any())
+                return null;
+
+            return englishTexts.GetRandomElement();
         }
 
-        public async Task<EnglishTextInfoModel> FindRandomInfoByFiltersAsync(int amount, string[] textTypes, EnglishLevelModel[] englishLevels)
+        public async Task<EnglishTextInfoModel> FindRandomInfoByFiltersAsync(string[] textTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.FindAllInfoByFilters(textTypes, englishLevels);
+            if (!englishLevels.Any())
+                return null;
+
+            return englishTexts.GetRandomElement();
         }
 
-        public async Task<EnglishTextInfoModel> FindRandomInfoByFiltersAsync(int amount, string phrase, string[] textTypes, EnglishLevelModel[] englishLevels)
+        public async Task<EnglishTextInfoModel> FindRandomInfoByFiltersAsync(string phrase, string[] textTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.FindAllInfoByFilters(phrase, textTypes, englishLevels);
+            if (!englishTexts.Any())
+                return null;
+
+            return englishTexts.GetRandomElement();
         }
 
         public async Task<IReadOnlyList<EnglishTextInfoModel>> GetRandomAmountInfoFromAllAsync(int amount)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.GetAllInfoAsync();
+            if (!englishTexts.Any())
+                return englishTexts;
+
+            return englishTexts.GetRandomCountOfElements(amount).ToList();
         }
 
         public async Task<IReadOnlyList<EnglishTextInfoModel>> FindRandomAmountInfoByPhraseAsync(int amount, string phrase)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.FindAllInfoByPhrase(phrase);
+            if (!englishTexts.Any())
+                return englishTexts;
+
+            return englishTexts.GetRandomCountOfElements(amount).ToList();
         }
 
         public async Task<IReadOnlyList<EnglishTextInfoModel>> FindRandomAmountInfoByFiltersAsync(int amount, string[] textTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.FindAllInfoByFilters(textTypes, englishLevels);
+            if (!englishTexts.Any())
+                return englishTexts;
+
+            return englishTexts.GetRandomCountOfElements(amount).ToList();
         }
 
         public async Task<IReadOnlyList<EnglishTextInfoModel>> FindRandomAmountInfoByFiltersAsync(int amount, string phrase, string[] textTypes,
             EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishTextInfoModel> englishTexts = await _textService.FindAllInfoByFilters(phrase, textTypes, englishLevels);
+            if (!englishTexts.Any())
+                return englishTexts;
+
+            return englishTexts.GetRandomCountOfElements(amount).ToList();
         }
     }
 }

@@ -1,51 +1,93 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using EnglishLearning.Multimedia.Application.Abstract;
 using EnglishLearning.Multimedia.Application.Abstract.Random;
 using EnglishLearning.Multimedia.Application.Models;
 using EnglishLearning.Multimedia.Application.Models.Enums;
+using EnglishLearning.Utilities.Linq.Extensions;
 
 namespace EnglishLearning.Multimedia.Application.Services.Random
 {
     public class RandomVideoService : IRandomVideoService
     {
+        private readonly IVideoService _videoService;
+
+        public RandomVideoService(IVideoService videoService)
+        {
+            _videoService = videoService;
+        }
+        
         public async Task<EnglishVideoModel> GetRandomFromAllAsync()
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.GetAllAsync();
+            if (!englishVideos.Any())
+                return null;
+
+            return englishVideos.GetRandomElement();
         }
 
         public async Task<EnglishVideoModel> FindRandomByPhraseAsync(int amount, string phrase)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByPhrase(phrase);
+            if (!englishVideos.Any())
+                return null;
+
+            return englishVideos.GetRandomElement();
         }
 
         public async Task<EnglishVideoModel> FindRandomByFiltersAsync(int amount, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(videoTypes, englishLevels);
+            if (!englishVideos.Any())
+                return null;
+
+            return englishVideos.GetRandomElement();
         }
 
         public async Task<EnglishVideoModel> FindRandomByFiltersAsync(int amount, string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(phrase, videoTypes, englishLevels);
+            if (!englishVideos.Any())
+                return null;
+
+            return englishVideos.GetRandomElement();
         }
 
         public async Task<IReadOnlyList<EnglishVideoModel>> GetRandomAmountFromAllAsync(int amount)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.GetAllAsync();
+            if (!englishVideos.Any())
+                return englishVideos;
+
+            return englishVideos.GetRandomCountOfElements(amount).ToList();
         }
 
         public async Task<IReadOnlyList<EnglishVideoModel>> FindRandomAmountByPhraseAsync(int amount, string phrase)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByPhrase(phrase);
+            if (!englishVideos.Any())
+                return englishVideos;
+
+            return englishVideos.GetRandomCountOfElements(amount).ToList();
         }
 
         public async Task<IReadOnlyList<EnglishVideoModel>> FindRandomAmountByFiltersAsync(int amount, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(videoTypes, englishLevels);
+            if (!englishVideos.Any())
+                return englishVideos;
+
+            return englishVideos.GetRandomCountOfElements(amount).ToList();
         }
 
         public async Task<IReadOnlyList<EnglishVideoModel>> FindRandomAmountByFiltersAsync(int amount, string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
-            throw new System.NotImplementedException();
+            IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(phrase, videoTypes, englishLevels);
+            if (!englishLevels.Any())
+                return englishVideos;
+
+            return englishVideos.GetRandomCountOfElements(amount).ToList();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace EnglishLearning.Multimedia.Application.Abstract.Random
     public interface IRandomAudioInfoService
     {
         Task<EnglishAudioInfoModel> GetRandomInfoFromAllAsync();
-        Task<EnglishAudioInfoModel> FindRandomInfoByPhraseAsync(int amount, string phrase);
-        Task<EnglishAudioInfoModel> FindRandomInfoByFiltersAsync(int amount, string[] audioTypes, EnglishLevelModel[] englishLevels);
-        Task<EnglishAudioInfoModel> FindRandomInfoByFiltersAsync(int amount, string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels);
+        Task<EnglishAudioInfoModel> FindRandomInfoByPhraseAsync(string phrase);
+        Task<EnglishAudioInfoModel> FindRandomInfoByFiltersAsync(string[] audioTypes, EnglishLevelModel[] englishLevels);
+        Task<EnglishAudioInfoModel> FindRandomInfoByFiltersAsync(string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels);
 
         Task<IReadOnlyList<EnglishAudioInfoModel>> GetRandomAmountInfoFromAllAsync(int amount);
         Task<IReadOnlyList<EnglishAudioInfoModel>> FindRandomAmountInfoByPhraseAsync(int amount, string phrase);
