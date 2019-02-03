@@ -5,7 +5,7 @@ namespace EnglishLearning.Multimedia.Application.Abstract.Filters
     public interface IEnglishAudioFilterService
     {
         AudioPlayerTypeFilterModel GetAudioPlayerTypeFilter();
-        AudioPlayerTypeFilterModel GetAudioTypeFilter();
+        AudioTypeFilterModel GetAudioTypeFilter();
         EnglishLevelFilterModel GetEnglishLevelFilter();
         EnglishAudioFullFilterModel GetEnglishAudioFullFilter();
     }

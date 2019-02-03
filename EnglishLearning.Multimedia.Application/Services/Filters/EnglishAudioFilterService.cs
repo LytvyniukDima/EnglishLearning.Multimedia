@@ -1,28 +1,49 @@
+using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract.Filters;
+using EnglishLearning.Multimedia.Application.Infrastructure;
 using EnglishLearning.Multimedia.Application.Models.Filters;
+using EnglishLearning.Multimedia.Persistence.Abstract;
+using EnglishLearning.Multimedia.Persistence.Entities;
+using EnglishLearning.Multimedia.Persistence.Entities.Audio;
 
 namespace EnglishLearning.Multimedia.Application.Services.Filters
 {
     public class EnglishAudioFilterService : IEnglishAudioFilterService
     {
+        private readonly IEnglishAudioFiltersRepository _englishAudioFiltersRepository;
+        private readonly IMapper _mapper;
+        public EnglishAudioFilterService(IEnglishAudioFiltersRepository englishAudioFiltersRepository, ApplicationMapper applicationMapper)
+        {
+            _englishAudioFiltersRepository = englishAudioFiltersRepository;
+            _mapper = applicationMapper.Mapper;
+        }
+        
         public AudioPlayerTypeFilterModel GetAudioPlayerTypeFilter()
         {
-            throw new System.NotImplementedException();
+            AudioPlayerTypeFilter audioPlayerType = _englishAudioFiltersRepository.GetAudioPlayerTypeFilter();
+
+            return _mapper.Map<AudioPlayerTypeFilterModel>(audioPlayerType);
         }
 
-        public AudioPlayerTypeFilterModel GetAudioTypeFilter()
+        public AudioTypeFilterModel GetAudioTypeFilter()
         {
-            throw new System.NotImplementedException();
+            AudioTypeFilter audioTypeFilter = _englishAudioFiltersRepository.GetAudioTypeFilter();
+
+            return _mapper.Map<AudioTypeFilterModel>(audioTypeFilter);
         }
 
         public EnglishLevelFilterModel GetEnglishLevelFilter()
         {
-            throw new System.NotImplementedException();
+            EnglishLevelFilter englishLevelFilter = _englishAudioFiltersRepository.GetEnglishLevelFilter();
+
+            return _mapper.Map<EnglishLevelFilterModel>(englishLevelFilter);
         }
 
         public EnglishAudioFullFilterModel GetEnglishAudioFullFilter()
         {
-            throw new System.NotImplementedException();
+            EnglishAudioFullFilter englishAudioFullFilter = _englishAudioFiltersRepository.GetEnglishAudioFullFilter();
+
+            return _mapper.Map<EnglishAudioFullFilterModel>(englishAudioFullFilter);
         }
     }
 }
