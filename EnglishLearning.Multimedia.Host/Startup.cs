@@ -1,4 +1,6 @@
-﻿using EnglishLearning.Multimedia.Persistence.Configuration;
+﻿using EnglishLearning.Multimedia.Application.Configuration;
+using EnglishLearning.Multimedia.Persistence.Configuration;
+using EnglishLearning.Multimedia.Web.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,8 +29,13 @@ namespace EnglishLearning.Multimedia.Host
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+
+            services.AddMvc();
             
-            services.PersistenceConfiguration(Configuration);
+            services
+                .PersistenceConfiguration(Configuration)
+                .AddApplicationConfiguration(Configuration)
+                .AddWebConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +45,9 @@ namespace EnglishLearning.Multimedia.Host
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseCors("CorsPolicy");
+            app.UseMvc();
         }
     }
 }

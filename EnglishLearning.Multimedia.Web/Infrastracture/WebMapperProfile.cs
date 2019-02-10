@@ -6,7 +6,6 @@ using EnglishLearning.Multimedia.Web.ViewModels;
 using EnglishLearning.Multimedia.Web.ViewModels.Create;
 using EnglishLearning.Multimedia.Web.ViewModels.Filters;
 using EnglishLearning.Multimedia.Web.ViewModels.Info;
-using EnglishLearning.Multimedia.Web.ViewModels.Filters;
 
 namespace EnglishLearning.Multimedia.Web.Infrastracture
 {
