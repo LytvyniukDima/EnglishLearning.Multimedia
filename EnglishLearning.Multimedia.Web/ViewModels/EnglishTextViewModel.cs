@@ -2,15 +2,14 @@ using EnglishLearning.Multimedia.Web.ViewModels.Enums;
 
 namespace EnglishLearning.Multimedia.Web.ViewModels
 {
-    public class EnglishVideoViewModels
+    public class EnglishTextViewModel
     {
         public string Id { get; set; }
         
-        public string ApiId { get; set; }
-        public string Title { get; set; }
-        public string Transcription { get; set; }
+        public string Text { get; set; }
+        public string HeadLine { get; set; }
         
-        public string VideoType { get; set; }
+        public string TextType { get; set; }
         public EnglishLevelViewModel EnglishLevel { get; set; }
     }
 }

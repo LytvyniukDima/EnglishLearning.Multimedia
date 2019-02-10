@@ -4,13 +4,15 @@ namespace EnglishLearning.Multimedia.Application.Infrastructure
 {
     public class ApplicationMapper
     {
+        private IMapper _mapper;
+        
         public ApplicationMapper()
         {
-            Mapper = new MapperConfiguration(x => x
+            _mapper = new MapperConfiguration(x => x
                     .AddProfile(new ApplicationMapperProfile()))
                 .CreateMapper();
         }
 
-        public IMapper Mapper { get; }
+        public IMapper Mapper  => _mapper;
     }
 }

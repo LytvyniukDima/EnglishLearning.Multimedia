@@ -6,8 +6,6 @@
     <ProjectReference Include="..\EnglishLearning.Multimedia.Application\EnglishLearning.Multimedia.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Configuration" />
     <Folder Include="Controllers" />
-    <Folder Include="Infrastracture" />
   </ItemGroup>
 </Project>
