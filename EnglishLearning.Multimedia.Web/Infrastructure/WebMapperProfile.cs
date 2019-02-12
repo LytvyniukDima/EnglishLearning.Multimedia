@@ -7,7 +7,7 @@ using EnglishLearning.Multimedia.Web.ViewModels.Create;
 using EnglishLearning.Multimedia.Web.ViewModels.Filters;
 using EnglishLearning.Multimedia.Web.ViewModels.Info;
 
-namespace EnglishLearning.Multimedia.Web.Infrastracture
+namespace EnglishLearning.Multimedia.Web.Infrastructure
 {
     public class WebMapperProfile : Profile
     {

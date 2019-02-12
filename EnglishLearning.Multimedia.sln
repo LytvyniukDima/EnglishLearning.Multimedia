@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishLearning.Multimedia.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishLearning.Multimedia.Web", "EnglishLearning.Multimedia.Web\EnglishLearning.Multimedia.Web.csproj", "{8FC5C3A1-A6C0-4076-8F86-ABA320022B86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishLearning.Multimedia.Infrastructure", "EnglishLearning.Multimedia.Infrastructure\EnglishLearning.Multimedia.Infrastructure.csproj", "{C8D08D76-C074-46FC-9B10-251E38056308}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,17 +72,5 @@ Global
 		{8FC5C3A1-A6C0-4076-8F86-ABA320022B86}.Release|x64.Build.0 = Release|Any CPU
 		{8FC5C3A1-A6C0-4076-8F86-ABA320022B86}.Release|x86.ActiveCfg = Release|Any CPU
 		{8FC5C3A1-A6C0-4076-8F86-ABA320022B86}.Release|x86.Build.0 = Release|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Debug|x64.Build.0 = Debug|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Debug|x86.Build.0 = Debug|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Release|x64.ActiveCfg = Release|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Release|x64.Build.0 = Release|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Release|x86.ActiveCfg = Release|Any CPU
-		{C8D08D76-C074-46FC-9B10-251E38056308}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

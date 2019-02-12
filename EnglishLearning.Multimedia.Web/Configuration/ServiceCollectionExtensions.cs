@@ -1,4 +1,4 @@
-using EnglishLearning.Multimedia.Web.Infrastracture;
+using EnglishLearning.Multimedia.Web.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EnglishLearning.Multimedia.Web.Configuration

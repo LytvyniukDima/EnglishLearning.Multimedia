@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace EnglishLearning.Multimedia.Web.Infrastracture
+namespace EnglishLearning.Multimedia.Web.Infrastructure
 {
     public class WebMapper
     {
