@@ -6,7 +6,9 @@
     <ProjectReference Include="..\EnglishLearning.Multimedia.Application\EnglishLearning.Multimedia.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers" />
+    <Folder Include="Controllers\Filter" />
+    <Folder Include="Controllers\Info" />
+    <Folder Include="Controllers\Random" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc">

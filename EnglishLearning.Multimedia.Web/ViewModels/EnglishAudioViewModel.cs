@@ -9,7 +9,7 @@ namespace EnglishLearning.Multimedia.Web.ViewModels
         
         public string ApiId { get; set; }
         public string Tittle { get; set; }
-        public int Duration { get; set; }
+        public TimeSpan Duration { get; set; }
         public Uri Uri { get; set; }
         public string Transcription { get; set; }
         
