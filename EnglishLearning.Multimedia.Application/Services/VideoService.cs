@@ -76,25 +76,6 @@ namespace EnglishLearning.Multimedia.Application.Services
             return _mapper.Map<IReadOnlyList<EnglishVideoInfoModel>>(englishVideos);
         }
 
-        public async Task<IReadOnlyList<EnglishVideoModel>> FindAllByPhrase(string phrase)
-        {
-            var englishVideos = await _englishVideoRepository.FindAllByPhrase(phrase);
-            if (englishVideos == null)
-                return new List<EnglishVideoModel>();
-            
-            return _mapper.Map<IReadOnlyList<EnglishVideoModel>>(englishVideos);
-        }
-
-        public async Task<IReadOnlyList<EnglishVideoModel>> FindAllByFilters(string[] videoTypes, EnglishLevelModel[] englishLevels)
-        {
-            var englishLevelEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
-            var englishVideos = await _englishVideoRepository.FindAllByFilters(videoTypes, englishLevelEntities);
-            if (englishVideos == null)
-                return new List<EnglishVideoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishVideoModel>>(englishVideos);
-        }
-
         public async Task<IReadOnlyList<EnglishVideoModel>> FindAllByFilters(string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
             var englishLevelEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
@@ -103,25 +84,6 @@ namespace EnglishLearning.Multimedia.Application.Services
                 return new List<EnglishVideoModel>();
 
             return _mapper.Map<IReadOnlyList<EnglishVideoModel>>(englishVideos);
-        }
-
-        public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindAllInfoByPhrase(string phrase)
-        {
-            var englishVideos = await _englishVideoRepository.FindAllByPhrase(phrase);
-            if (englishVideos == null)
-                return new List<EnglishVideoInfoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishVideoInfoModel>>(englishVideos);
-        }
-
-        public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindAllInfoByFilters(string[] videoTypes, EnglishLevelModel[] englishLevels)
-        {
-            var englishLevelEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
-            var englishVideos = await _englishVideoRepository.FindAllInfoByFilters(videoTypes, englishLevelEntities);
-            if (englishVideos == null)
-                return new List<EnglishVideoInfoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishVideoInfoModel>>(englishLevelEntities);
         }
 
         public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindAllInfoByFilters(string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)

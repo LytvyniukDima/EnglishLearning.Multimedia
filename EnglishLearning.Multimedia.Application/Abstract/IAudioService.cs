@@ -19,12 +19,8 @@ namespace EnglishLearning.Multimedia.Application.Abstract
         Task<EnglishAudioInfoModel> GetInfoByIdAsync(string id);
         Task<IReadOnlyList<EnglishAudioInfoModel>> GetInfoAllAsync();
         
-        Task<IReadOnlyList<EnglishAudioModel>> FindAllByPhrase(string phrase);
-        Task<IReadOnlyList<EnglishAudioModel>> FindAllByFilters(string[] audioTypes, EnglishLevelModel[] englishLevels);
         Task<IReadOnlyList<EnglishAudioModel>> FindAllByFilters(string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels);
         
-        Task<IReadOnlyList<EnglishAudioInfoModel>> FindAllInfoByPhrase(string phrase);
-        Task<IReadOnlyList<EnglishAudioInfoModel>> FindAllInfoByFilters(string[] audioTypes, EnglishLevelModel[] englishLevels);
         Task<IReadOnlyList<EnglishAudioInfoModel>> FindAllInfoByFilters(string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels);
     }
 }

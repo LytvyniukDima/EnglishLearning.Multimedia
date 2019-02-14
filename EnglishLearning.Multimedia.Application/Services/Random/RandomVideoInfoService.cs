@@ -27,24 +27,6 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
             return englishVideos.GetRandomElement();
         }
 
-        public async Task<EnglishVideoInfoModel> FindRandomInfoByPhraseAsync(string phrase)
-        {
-            IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByPhrase(phrase);
-            if (!englishVideos.Any())
-                return null;
-
-            return englishVideos.GetRandomElement();
-        }
-
-        public async Task<EnglishVideoInfoModel> FindRandomInfoByFiltersAsync(string[] videoTypes, EnglishLevelModel[] englishLevels)
-        {
-            IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByFilters(videoTypes, englishLevels);
-            if (!englishVideos.Any())
-                return null;
-
-            return englishVideos.GetRandomElement();
-        }
-
         public async Task<EnglishVideoInfoModel> FindRandomInfoByFiltersAsync(string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
             IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByFilters(phrase, videoTypes, englishLevels);
@@ -57,24 +39,6 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         public async Task<IReadOnlyList<EnglishVideoInfoModel>> GetRandomAmountInfoFromAllAsync(int amount)
         {
             IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.GetAllInfoAsync();
-            if (!englishVideos.Any())
-                return englishVideos;
-
-            return englishVideos.GetRandomCountOfElements(amount).ToList();
-        }
-
-        public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindRandomAmountInfoByPhraseAsync(int amount, string phrase)
-        {
-            IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByPhrase(phrase);
-            if (!englishVideos.Any())
-                return englishVideos;
-
-            return englishVideos.GetRandomCountOfElements(amount).ToList();
-        }
-
-        public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindRandomAmountInfoByFiltersAsync(int amount, string[] videoTypes, EnglishLevelModel[] englishLevels)
-        {
-            IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByFilters(videoTypes, englishLevels);
             if (!englishVideos.Any())
                 return englishVideos;
 

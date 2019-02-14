@@ -76,23 +76,6 @@ namespace EnglishLearning.Multimedia.Application.Services
             return _mapper.Map<IReadOnlyList<EnglishTextInfoModel>>(englishTexts);
         }
 
-        public async Task<IReadOnlyList<EnglishTextModel>> FindAllByPhrase(string phrase)
-        {
-            var englishTexts = await _englishTextRepository.FindAllByPhrase(phrase);
-
-            return _mapper.Map<IReadOnlyList<EnglishTextModel>>(englishTexts);
-        }
-
-        public async Task<IReadOnlyList<EnglishTextModel>> FindAllByFilters(string[] textTypes, EnglishLevelModel[] englishLevels)
-        {
-            var englishLevelEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
-            var englishTexts = await _englishTextRepository.FindAllByFilters(textTypes, englishLevelEntities);
-            if (englishTexts == null)
-                return new List<EnglishTextModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishTextModel>>(englishTexts);
-        }
-
         public async Task<IReadOnlyList<EnglishTextModel>> FindAllByFilters(string phrase, string[] textTypes, EnglishLevelModel[] englishLevels)
         {
             var englishLevelEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
@@ -101,25 +84,6 @@ namespace EnglishLearning.Multimedia.Application.Services
                 return new List<EnglishTextModel>();
 
             return _mapper.Map<IReadOnlyList<EnglishTextModel>>(englishTexts);
-        }
-
-        public async Task<IReadOnlyList<EnglishTextInfoModel>> FindAllInfoByPhrase(string phrase)
-        {
-            var englishTexts = await _englishTextRepository.FindAllInfoByPhrase(phrase);
-            if (englishTexts == null)
-                return new List<EnglishTextInfoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishTextInfoModel>>(englishTexts);
-        }
-
-        public async Task<IReadOnlyList<EnglishTextInfoModel>> FindAllInfoByFilters(string[] textTypes, EnglishLevelModel[] englishLevels)
-        {
-            var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
-            var englishTexts = await _englishTextRepository.FindAllInfoByFilters(textTypes, englishLevelsEntities);
-            if (englishTexts == null)
-                return new List<EnglishTextInfoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishTextInfoModel>>(englishTexts);
         }
 
         public async Task<IReadOnlyList<EnglishTextInfoModel>> FindAllInfoByFilters(string phrase, string[] textTypes, EnglishLevelModel[] englishLevels)

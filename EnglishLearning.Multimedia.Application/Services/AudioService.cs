@@ -81,25 +81,6 @@ namespace EnglishLearning.Multimedia.Application.Services
             return _mapper.Map<IReadOnlyList<EnglishAudioInfoModel>>(englishInfoAudios);
         }
 
-        public async Task<IReadOnlyList<EnglishAudioModel>> FindAllByPhrase(string phrase)
-        {
-            var englishAudios = await _englishAudioRepository.FindAllByPhrase(phrase);
-            if (englishAudios == null)
-                return new List<EnglishAudioModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishAudioModel>>(englishAudios);
-        }
-
-        public async Task<IReadOnlyList<EnglishAudioModel>> FindAllByFilters(string[] audioTypes, EnglishLevelModel[] englishLevels)
-        {
-            var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
-            var englishAudios = await _englishAudioRepository.FindAllByFilters(audioTypes, englishLevelsEntities);
-            if (englishAudios == null)
-                return new List<EnglishAudioModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishAudioModel>>(englishAudios);
-        }
-
         public async Task<IReadOnlyList<EnglishAudioModel>> FindAllByFilters(string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels)
         {
             var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
@@ -108,25 +89,6 @@ namespace EnglishLearning.Multimedia.Application.Services
                 return new List<EnglishAudioModel>();
 
             return _mapper.Map<IReadOnlyList<EnglishAudioModel>>(englishAudios);
-        }
-
-        public async Task<IReadOnlyList<EnglishAudioInfoModel>> FindAllInfoByPhrase(string phrase)
-        {
-            var englishInfoAudios = await _englishAudioRepository.FindAllInfoByPhrase(phrase);
-            if (englishInfoAudios == null)
-                return new List<EnglishAudioInfoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishAudioInfoModel>>(englishInfoAudios);
-        }
-
-        public async Task<IReadOnlyList<EnglishAudioInfoModel>> FindAllInfoByFilters(string[] audioTypes, EnglishLevelModel[] englishLevels)
-        {
-            var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
-            var englishAudios = await _englishAudioRepository.FindAllInfoByFilters(audioTypes, englishLevelsEntities);
-            if (englishAudios == null)
-                return new List<EnglishAudioInfoModel>();
-
-            return _mapper.Map<IReadOnlyList<EnglishAudioInfoModel>>(englishAudios);
         }
 
         public async Task<IReadOnlyList<EnglishAudioInfoModel>> FindAllInfoByFilters(string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels)

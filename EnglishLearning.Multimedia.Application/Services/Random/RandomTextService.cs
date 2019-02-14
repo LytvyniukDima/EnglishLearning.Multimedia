@@ -27,24 +27,6 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
             return englishTexts.GetRandomElement();
         }
 
-        public async Task<EnglishTextModel> FindRandomByPhraseAsync(int amount, string phrase)
-        {
-            IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByPhrase(phrase);
-            if (!englishTexts.Any())
-                return null;
-
-            return englishTexts.GetRandomElement();
-        }
-
-        public async Task<EnglishTextModel> FindRandomByFiltersAsync(int amount, string[] textTypes, EnglishLevelModel[] englishLevels)
-        {
-            IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByFilters(textTypes, englishLevels);
-            if (!englishTexts.Any())
-                return null;
-
-            return englishTexts.GetRandomElement();
-        }
-
         public async Task<EnglishTextModel> FindRandomByFiltersAsync(int amount, string phrase, string[] textTypes, EnglishLevelModel[] englishLevels)
         {
             IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByFilters(phrase, textTypes, englishLevels);
@@ -57,24 +39,6 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         public async Task<IReadOnlyList<EnglishTextModel>> GetRandomAmountFromAllAsync(int amount)
         {
             IReadOnlyList<EnglishTextModel> englishTexts = await _textService.GetAllAsync();
-            if (!englishTexts.Any())
-                return englishTexts;
-
-            return englishTexts.GetRandomCountOfElements(amount).ToList();
-        }
-
-        public async Task<IReadOnlyList<EnglishTextModel>> FindRandomAmountByPhraseAsync(int amount, string phrase)
-        {
-            IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByPhrase(phrase);
-            if (!englishTexts.Any())
-                return englishTexts;
-
-            return englishTexts.GetRandomCountOfElements(amount).ToList();
-        }
-
-        public async Task<IReadOnlyList<EnglishTextModel>> FindRandomAmountByFiltersAsync(int amount, string[] textTypes, EnglishLevelModel[] englishLevels)
-        {
-            IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByFilters(textTypes, englishLevels);
             if (!englishTexts.Any())
                 return englishTexts;
 

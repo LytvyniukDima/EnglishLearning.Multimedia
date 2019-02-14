@@ -27,24 +27,6 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
             return englishAudios.GetRandomElement();
         }
 
-        public async Task<EnglishAudioInfoModel> FindRandomInfoByPhraseAsync(string phrase)
-        {
-            IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _audioService.FindAllInfoByPhrase(phrase);
-            if (!englishAudios.Any())
-                return null;
-
-            return englishAudios.GetRandomElement();
-        }
-
-        public async Task<EnglishAudioInfoModel> FindRandomInfoByFiltersAsync(string[] audioTypes, EnglishLevelModel[] englishLevels)
-        {
-            IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _audioService.FindAllInfoByFilters(audioTypes, englishLevels);
-            if (!englishAudios.Any())
-                return null;
-
-            return englishAudios.GetRandomElement();
-        }
-
         public async Task<EnglishAudioInfoModel> FindRandomInfoByFiltersAsync(string phrase, string[] audioTypes, EnglishLevelModel[] englishLevels)
         {
             IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _audioService.FindAllInfoByFilters(phrase, audioTypes, englishLevels);
@@ -57,24 +39,6 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         public async Task<IReadOnlyList<EnglishAudioInfoModel>> GetRandomAmountInfoFromAllAsync(int amount)
         {
             IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _audioService.GetInfoAllAsync();
-            if (!englishAudios.Any())
-                return englishAudios;
-
-            return englishAudios.GetRandomCountOfElements(amount).ToList();
-        }
-
-        public async Task<IReadOnlyList<EnglishAudioInfoModel>> FindRandomAmountInfoByPhraseAsync(int amount, string phrase)
-        {
-            IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _audioService.FindAllInfoByPhrase(phrase);
-            if (!englishAudios.Any())
-                return englishAudios;
-
-            return englishAudios.GetRandomCountOfElements(amount).ToList();
-        }
-
-        public async Task<IReadOnlyList<EnglishAudioInfoModel>> FindRandomAmountInfoByFiltersAsync(int amount, string[] audioTypes, EnglishLevelModel[] englishLevels)
-        {
-            IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _audioService.FindAllInfoByFilters(audioTypes, englishLevels);
             if (!englishAudios.Any())
                 return englishAudios;
 

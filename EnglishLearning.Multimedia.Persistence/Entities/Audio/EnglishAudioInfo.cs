@@ -1,3 +1,4 @@
+using System;
 using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -10,7 +11,7 @@ namespace EnglishLearning.Multimedia.Persistence.Entities.Audio
         public string Id { get; set; }
         
         public string Tittle { get; set; }
-        public int Duration { get; set; }
+        public TimeSpan Duration { get; set; }
         
         public string AudioType { get; set; }
         [BsonRepresentation(BsonType.String)]
