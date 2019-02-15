@@ -27,7 +27,7 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
             return englishVideos.GetRandomElement();
         }
 
-        public async Task<EnglishVideoModel> FindRandomByFiltersAsync(int amount, string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)
+        public async Task<EnglishVideoModel> FindRandomByFiltersAsync(string phrase, string[] videoTypes, EnglishLevelModel[] englishLevels)
         {
             IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(phrase, videoTypes, englishLevels);
             if (!englishVideos.Any())

@@ -28,7 +28,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
                     Value = group.Count()
                 })
                 .ToEnumerable()
-                .ToDictionary(x => x.Key, x => x.Value);
+                .ToDictionary(x => x.Key ?? string.Empty, x => x.Value);
 
             var textTypeFilter = new TextTypeFilter { FilterOptions = filterOptions };
             

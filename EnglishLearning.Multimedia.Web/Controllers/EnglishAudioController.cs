@@ -104,11 +104,11 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             var englishLevelModels = _mapper.Map<EnglishLevelModel[]>(englishLevel);
             
-            IReadOnlyList<EnglishAudioModel> englishTakModels = await _audioService.FindAllByFilters(phrase, audioType, englishLevelModels);
-            if (!englishTakModels.Any())
+            IReadOnlyList<EnglishAudioModel> englishAudioModels = await _audioService.FindAllByFilters(phrase, audioType, englishLevelModels);
+            if (!englishAudioModels.Any())
                 return NotFound();
 
-            var englishAudioViewModels = _mapper.Map<IEnumerable<EnglishAudioViewModel>>(englishTakModels);
+            var englishAudioViewModels = _mapper.Map<IEnumerable<EnglishAudioViewModel>>(englishAudioModels);
             
             return Ok(englishAudioViewModels);
         }
