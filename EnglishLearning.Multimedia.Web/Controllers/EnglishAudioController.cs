@@ -29,7 +29,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             IReadOnlyList<EnglishAudioModel> englishAudioModels = await _audioService.GetAllAsync();
             var englishAudioViewModels = _mapper.Map<IReadOnlyList<EnglishAudioViewModel>>(englishAudioModels);
@@ -38,8 +38,8 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [AllowAnonymous]
-        [HttpGet("/{id}")]
-        public async Task<IActionResult> Get(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
         {
             EnglishAudioModel englishAudio = await _audioService.GetByIdAsync(id);
             if (englishAudio == null)
@@ -51,7 +51,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] EnglishAudioCreateViewModel englishAudioCreateViewModel)
+        public async Task<IActionResult> Create([FromBody] EnglishAudioCreateViewModel englishAudioCreateViewModel)
         {
             var englishAudioCreateModel = _mapper.Map<EnglishAudioCreateModel>(englishAudioCreateViewModel);
             
@@ -61,7 +61,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] EnglishAudioViewModel englishAudioViewModel)
+        public async Task<IActionResult> Update(string id, [FromBody] EnglishAudioViewModel englishAudioViewModel)
         {
             var englishAudioCreateModel = _mapper.Map<EnglishAudioModel>(englishAudioViewModel);
 
@@ -74,7 +74,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteById(string id)
         {
             bool result = await _audioService.DeleteByIdAsync(id);
 
@@ -85,7 +85,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpDelete]
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> DeleteAll()
         {
             bool result = await _audioService.DeleteAllAsync();
 

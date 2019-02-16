@@ -29,7 +29,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             IReadOnlyList<EnglishVideoModel> englishVideoModels = await _videoService.GetAllAsync();
             var englishVideoViewModels = _mapper.Map<IReadOnlyList<EnglishVideoViewModel>>(englishVideoModels);
@@ -38,8 +38,8 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [AllowAnonymous]
-        [HttpGet("/{id}")]
-        public async Task<IActionResult> Get(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
         {
             EnglishVideoModel englishVideo = await _videoService.GetByIdAsync(id);
             if (englishVideo == null)
@@ -51,7 +51,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] EnglishVideoCreateViewModel englishVideoCreateViewModel)
+        public async Task<IActionResult> Create([FromBody] EnglishVideoCreateViewModel englishVideoCreateViewModel)
         {
             var englishVideoCreateModel = _mapper.Map<EnglishVideoCreateModel>(englishVideoCreateViewModel);
             
@@ -61,7 +61,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] EnglishVideoViewModel englishVideoViewModel)
+        public async Task<IActionResult> Update(string id, [FromBody] EnglishVideoViewModel englishVideoViewModel)
         {
             var englishVideoCreateModel = _mapper.Map<EnglishVideoModel>(englishVideoViewModel);
 
@@ -74,7 +74,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteById(string id)
         {
             bool result = await _videoService.DeleteByIdAsync(id);
 
@@ -85,7 +85,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         }
         
         [HttpDelete]
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> DeleteAll()
         {
             bool result = await _videoService.DeleteAllAsync();
 
