@@ -39,10 +39,11 @@ namespace EnglishLearning.Multimedia.Host.Infrastructure
 
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
         {
-            app.UseSwagger();
+            app.UseSwagger(s => { s.RouteTemplate = "api/multimedia/swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(s =>
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "EnglishLearning.Multimedia service API");
+                s.RoutePrefix = "api/multimedia/swagger";
+                s.SwaggerEndpoint("v1/swagger.json", "EnglishLearning.Multimedia service API");
             });
 
             return app;
