@@ -6,6 +6,9 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EnglishLearning.Utilities.Identity">
+      <Version>1.1.0-CI-20190410-035832</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Swashbuckle.AspNetCore">
       <Version>4.0.1</Version>

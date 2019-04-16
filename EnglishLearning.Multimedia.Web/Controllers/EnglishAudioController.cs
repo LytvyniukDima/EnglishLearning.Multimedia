@@ -10,6 +10,7 @@ using EnglishLearning.Multimedia.Web.Infrastructure;
 using EnglishLearning.Multimedia.Web.ViewModels;
 using EnglishLearning.Multimedia.Web.ViewModels.Create;
 using EnglishLearning.Multimedia.Web.ViewModels.Enums;
+using EnglishLearning.Utilities.Identity.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,14 +21,13 @@ namespace EnglishLearning.Multimedia.Web.Controllers
     {
         private readonly IAudioService _audioService;
         private readonly IMapper _mapper;
-
+        
         public EnglishAudioController(IAudioService audioService, WebMapper webMapper)
         {
             _audioService = audioService;
             _mapper = webMapper.Mapper;
         }
         
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -37,7 +37,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok(englishAudioViewModels);
         }
         
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
@@ -50,6 +49,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok(englishAudioViewModel);
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] EnglishAudioCreateViewModel englishAudioCreateViewModel)
         {
@@ -60,6 +60,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] EnglishAudioViewModel englishAudioViewModel)
         {
@@ -73,6 +74,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById(string id)
         {
@@ -84,6 +86,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {

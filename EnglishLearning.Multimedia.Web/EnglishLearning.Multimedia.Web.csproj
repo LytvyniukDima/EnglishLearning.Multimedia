@@ -6,6 +6,9 @@
     <ProjectReference Include="..\EnglishLearning.Multimedia.Application\EnglishLearning.Multimedia.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EnglishLearning.Utilities.Identity.Abstractions">
+      <Version>1.1.0-CI-20190410-035832</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc">
       <Version>2.2.0</Version>
     </PackageReference>

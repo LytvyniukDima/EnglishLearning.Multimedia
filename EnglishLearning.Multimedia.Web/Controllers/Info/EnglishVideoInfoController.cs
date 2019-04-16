@@ -8,7 +8,6 @@ using EnglishLearning.Multimedia.Application.Models.InfoModels;
 using EnglishLearning.Multimedia.Web.Infrastructure;
 using EnglishLearning.Multimedia.Web.ViewModels.Enums;
 using EnglishLearning.Multimedia.Web.ViewModels.Info;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishLearning.Multimedia.Web.Controllers.Info
@@ -25,7 +24,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
             _mapper = webMapper.Mapper;
         }
         
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllInfo()
         {
@@ -35,7 +33,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
             return Ok(englishVideoViewModels);
         }
         
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInfoById(string id)
         {
@@ -48,7 +45,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
             return Ok(englishVideoViewModel);
         }
         
-        [AllowAnonymous]
         [HttpGet("~/api/multimedia/search/info/video")]
         public async Task<ActionResult> GetAllByFilter(
             [FromQuery] string phrase,

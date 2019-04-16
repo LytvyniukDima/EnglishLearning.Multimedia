@@ -7,6 +7,7 @@ using EnglishLearning.Multimedia.Persistence.Repositories.Text;
 using EnglishLearning.Multimedia.Persistence.Repositories.Video;
 using EnglishLearning.Utilities.Configurations.MongoConfiguration;
 using EnglishLearning.Utilities.Persistence.Mongo.Configuration;
+using EnglishLearning.Utilities.Persistence.Redis.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -47,6 +48,8 @@ namespace EnglishLearning.Multimedia.Persistence.Configuration
             services.AddTransient<IEnglishAudioFiltersRepository, EnglishAudioFilterRepository>();
             services.AddTransient<IEnglishTextFiltersRepository, EnglishTextFilterRepository>();
             services.AddTransient<IEnglishVideoFiltersRepository, EnglishVideoFilterRepository>();
+
+            services.AddRedis(configuration);
             
             return services;
         }

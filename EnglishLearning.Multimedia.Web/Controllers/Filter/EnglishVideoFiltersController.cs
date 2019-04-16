@@ -4,7 +4,6 @@ using EnglishLearning.Multimedia.Application.Abstract.Filters;
 using EnglishLearning.Multimedia.Application.Models.Filters;
 using EnglishLearning.Multimedia.Web.Infrastructure;
 using EnglishLearning.Multimedia.Web.ViewModels.Filters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishLearning.Multimedia.Web.Controllers.Filter
@@ -21,7 +20,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
             _mapper = webMapper.Mapper;
         }
         
-        [AllowAnonymous]
         [HttpGet("types")]
         public async Task<IActionResult> GetVideoTypeFilter()
         {
@@ -31,7 +29,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
             return Ok(filterViewModels);
         }
         
-        [AllowAnonymous]
         [HttpGet("english_levels")]
         public async Task<IActionResult> GetEnglishLevelFilter()
         {
@@ -41,7 +38,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
             return Ok(filterViewModels);
         }
         
-        [AllowAnonymous]
         [HttpGet("full")]
         public async Task<IActionResult> GetEnglishVideoFullFilter()
         {

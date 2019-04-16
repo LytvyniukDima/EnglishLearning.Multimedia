@@ -7,7 +7,6 @@ using EnglishLearning.Multimedia.Application.Models.InfoModels;
 using EnglishLearning.Multimedia.Web.Infrastructure;
 using EnglishLearning.Multimedia.Web.ViewModels.Enums;
 using EnglishLearning.Multimedia.Web.ViewModels.Info;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishLearning.Multimedia.Web.Controllers.Random
@@ -24,7 +23,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             _mapper = webMapper.Mapper;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> GetRandomFromAll()
         {
@@ -34,7 +32,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             return Ok(englishAudioViewModel);
         }
 
-        [AllowAnonymous]
         [HttpGet("{amount}")]
         public async Task<ActionResult> GetRandomAmountFromAll(int amount)
         {
@@ -44,7 +41,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             return Ok(englishAudios);
         }
 
-        [AllowAnonymous]
         [HttpGet("~/api/multimedia/random/info/search/audio")]
         public async Task<ActionResult> FindRandomByFilter(
             [FromQuery] string phrase,
@@ -62,7 +58,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             return Ok(englishAudioViewModel);
         }
         
-        [AllowAnonymous]
         [HttpGet("~/api/multimedia/random/info/search/audio/{amount}")]
         public async Task<ActionResult> FindRandomAmountByFilter(
             int amount,

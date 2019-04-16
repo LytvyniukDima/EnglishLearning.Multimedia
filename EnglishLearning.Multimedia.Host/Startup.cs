@@ -2,6 +2,7 @@
 using EnglishLearning.Multimedia.Host.Infrastructure;
 using EnglishLearning.Multimedia.Persistence.Configuration;
 using EnglishLearning.Multimedia.Web.Configuration;
+using EnglishLearning.Utilities.Identity.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,14 +32,16 @@ namespace EnglishLearning.Multimedia.Host
                         .AllowCredentials());
             });
 
-            services.AddMvc();
+            services.AddMvc(options => { options.AddEnglishLearningIdentityFilters(); });
             
             services
                 .PersistenceConfiguration(Configuration)
                 .AddApplicationConfiguration(Configuration)
                 .AddWebConfiguration();
-
+        
             services.AddSwaggerDocumentation();
+            
+            services.AddEnglishLearningIdentity();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

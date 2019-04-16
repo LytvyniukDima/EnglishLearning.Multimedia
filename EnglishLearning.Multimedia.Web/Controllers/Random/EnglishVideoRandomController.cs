@@ -24,7 +24,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             _mapper = webMapper.Mapper;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> GetRandomFromAll()
         {
@@ -34,7 +33,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             return Ok(englishVideoViewModel);
         }
 
-        [AllowAnonymous]
         [HttpGet("{amount}")]
         public async Task<ActionResult> GetRandomAmountFromAll(int amount)
         {
@@ -44,7 +42,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             return Ok(englishVideos);
         }
 
-        [AllowAnonymous]
         [HttpGet("~/api/multimedia/random/search/video")]
         public async Task<ActionResult> FindRandomByFilter(
             [FromQuery] string phrase,
@@ -62,7 +59,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             return Ok(englishVideoViewModel);
         }
         
-        [AllowAnonymous]
         [HttpGet("~/api/multimedia/random/search/video/{amount}")]
         public async Task<ActionResult> FindRandomAmountByFilter(
             int amount,

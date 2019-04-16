@@ -10,7 +10,7 @@ using EnglishLearning.Multimedia.Web.Infrastructure;
 using EnglishLearning.Multimedia.Web.ViewModels;
 using EnglishLearning.Multimedia.Web.ViewModels.Create;
 using EnglishLearning.Multimedia.Web.ViewModels.Enums;
-using Microsoft.AspNetCore.Authorization;
+using EnglishLearning.Utilities.Identity.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishLearning.Multimedia.Web.Controllers
@@ -27,7 +27,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             _mapper = webMapper.Mapper;
         }
         
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -37,7 +36,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok(englishTextViewModels);
         }
         
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
@@ -50,6 +48,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok(englishTextViewModel);
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] EnglishTextCreateViewModel englishTextCreateViewModel)
         {
@@ -60,6 +59,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] EnglishTextViewModel englishTextViewModel)
         {
@@ -73,6 +73,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById(string id)
         {
@@ -84,6 +85,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
+        [EnglishLearningAuthorize(AuthorizeRole.Admin)]
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {
@@ -95,7 +97,6 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             return Ok();
         }
         
-        [AllowAnonymous]
         [HttpGet("~/api/multimedia/search/text")]
         public async Task<ActionResult> GetAllByFilter(
             [FromQuery] string phrase,
