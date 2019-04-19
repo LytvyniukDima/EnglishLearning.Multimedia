@@ -2,6 +2,7 @@
 using EnglishLearning.Multimedia.Host.Infrastructure;
 using EnglishLearning.Multimedia.Persistence.Configuration;
 using EnglishLearning.Multimedia.Web.Configuration;
+using EnglishLearning.Utilities.General.Extensions;
 using EnglishLearning.Utilities.Identity.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -51,6 +52,8 @@ namespace EnglishLearning.Multimedia.Host
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseEnglishLearningExceptionMiddleware();
             
             app.UseCors("CorsPolicy");
             app.UseSwaggerDocumentation();

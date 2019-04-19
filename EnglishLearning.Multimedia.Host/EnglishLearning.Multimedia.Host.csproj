@@ -6,8 +6,11 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EnglishLearning.Utilities.General">
+      <Version>1.1.0-CI-20190419-040524</Version>
+    </PackageReference>
     <PackageReference Include="EnglishLearning.Utilities.Identity">
-      <Version>1.1.0-CI-20190410-035832</Version>
+      <Version>1.1.0-CI-20190419-040524</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Serilog.AspNetCore">
