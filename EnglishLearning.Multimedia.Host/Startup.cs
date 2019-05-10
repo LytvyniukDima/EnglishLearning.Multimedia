@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Converters;
 
 namespace EnglishLearning.Multimedia.Host
 {
@@ -33,7 +34,15 @@ namespace EnglishLearning.Multimedia.Host
                         .AllowCredentials());
             });
 
-            services.AddMvc(options => { options.AddEnglishLearningIdentityFilters(); });
+            services
+                .AddMvc(options =>
+                {
+                    options.AddEnglishLearningIdentityFilters();
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
             
             services
                 .PersistenceConfiguration(Configuration)
