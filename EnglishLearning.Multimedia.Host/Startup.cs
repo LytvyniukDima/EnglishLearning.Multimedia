@@ -31,7 +31,8 @@ namespace EnglishLearning.Multimedia.Host
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials());
+                        .AllowCredentials()
+                        .WithExposedHeaders("Authorization"));
             });
 
             services
