@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EnglishLearning.Multimedia.Application.Abstract;
@@ -22,7 +22,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.GetAllInfoAsync();
             if (!englishVideos.Any())
+            {
                 return null;
+            }
 
             return englishVideos.GetRandomElement();
         }
@@ -31,7 +33,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByFilters(phrase, videoTypes, englishLevels);
             if (!englishVideos.Any())
+            {
                 return null;
+            }
 
             return englishVideos.GetRandomElement();
         }
@@ -40,17 +44,24 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.GetAllInfoAsync();
             if (!englishVideos.Any())
+            {
                 return englishVideos;
+            }
 
             return englishVideos.GetRandomCountOfElements(amount).ToList();
         }
 
-        public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindRandomAmountInfoByFiltersAsync(int amount, string phrase, string[] videoTypes,
+        public async Task<IReadOnlyList<EnglishVideoInfoModel>> FindRandomAmountInfoByFiltersAsync(
+            int amount, 
+            string phrase, 
+            string[] videoTypes,
             EnglishLevelModel[] englishLevels)
         {
             IReadOnlyList<EnglishVideoInfoModel> englishVideos = await _videoService.FindAllInfoByFilters(phrase, videoTypes, englishLevels);
             if (!englishVideos.Any())
+            {
                 return englishVideos;
+            }
 
             return englishVideos.GetRandomCountOfElements(amount).ToList();
         }

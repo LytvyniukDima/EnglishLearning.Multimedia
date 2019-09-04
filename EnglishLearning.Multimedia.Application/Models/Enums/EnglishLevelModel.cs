@@ -1,4 +1,4 @@
-namespace EnglishLearning.Multimedia.Application.Models.Enums
+﻿namespace EnglishLearning.Multimedia.Application.Models.Enums
 {
     public enum EnglishLevelModel
     {
@@ -7,6 +7,6 @@ namespace EnglishLearning.Multimedia.Application.Models.Enums
         Intermediate,
         UpperIntermediate,
         Advanced,
-        None
+        None,
     }
 }

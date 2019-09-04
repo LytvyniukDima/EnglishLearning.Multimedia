@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract;
@@ -41,10 +41,13 @@ namespace EnglishLearning.Multimedia.Application.Services
         public async Task<EnglishAudioModel> GetByIdAsync(string id)
         {
             var englishAudio = await _englishAudioRepository.FindAsync(x => x.Id == id);
+            
             // TODO: Throw NotFoundException
             if (englishAudio == null)
+            {
                 return null;
-            
+            }
+
             return _mapper.Map<EnglishAudioModel>(englishAudio);
         }
 
@@ -69,7 +72,9 @@ namespace EnglishLearning.Multimedia.Application.Services
         {
             var englishAudio = await _englishAudioRepository.FindAsync(x => x.Id == id);
             if (englishAudio == null)
+            {
                 return null;
+            }
 
             return _mapper.Map<EnglishAudioInfoModel>(englishAudio);
         }
@@ -86,7 +91,9 @@ namespace EnglishLearning.Multimedia.Application.Services
             var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
             var englishAudios = await _englishAudioRepository.FindAllByFilters(phrase, audioTypes, englishLevelsEntities);
             if (englishAudios == null)
+            {
                 return new List<EnglishAudioModel>();
+            }
 
             return _mapper.Map<IReadOnlyList<EnglishAudioModel>>(englishAudios);
         }
@@ -96,7 +103,9 @@ namespace EnglishLearning.Multimedia.Application.Services
             var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
             var englishAudios = await _englishAudioRepository.FindAllInfoByFilters(phrase, audioTypes, englishLevelsEntities);
             if (englishAudios == null)
+            {
                 return new List<EnglishAudioInfoModel>();
+            }
 
             return _mapper.Map<IReadOnlyList<EnglishAudioInfoModel>>(englishAudios);
         }

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EnglishLearning.Multimedia.Application.Abstract;
@@ -22,8 +22,10 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishAudioModel> englishAudios = await _audioService.GetAllAsync();
             if (!englishAudios.Any())
+            {
                 return null;
-            
+            }
+
             return englishAudios.GetRandomElement();
         }
 
@@ -31,7 +33,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishAudioModel> englishAudios = await _audioService.FindAllByFilters(phrase, audioTypes, englishLevels);
             if (!englishAudios.Any())
+            {
                 return null;
+            }
 
             return englishAudios.GetRandomElement();
         }
@@ -40,8 +44,10 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishAudioModel> englishAudios = await _audioService.GetAllAsync();
             if (!englishAudios.Any())
+            {
                 return englishAudios;
-            
+            }
+
             return englishAudios.GetRandomCountOfElements(amount).ToList();
         }
 
@@ -49,7 +55,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishAudioModel> englishAudios = await _audioService.FindAllByFilters(phrase, audioTypes, englishLevels);
             if (!englishAudios.Any())
+            {
                 return englishAudios;
+            }
 
             return englishAudios.GetRandomCountOfElements(amount).ToList();
         }

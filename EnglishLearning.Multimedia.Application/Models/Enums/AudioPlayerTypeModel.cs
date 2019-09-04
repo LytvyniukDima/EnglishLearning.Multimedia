@@ -1,9 +1,9 @@
-namespace EnglishLearning.Multimedia.Application.Models.Enums
+﻿namespace EnglishLearning.Multimedia.Application.Models.Enums
 {
     public enum AudioPlayerTypeModel
     {
         YouTube,
         SoundCloud,
-        MediaPlayer
+        MediaPlayer,
     }
 }

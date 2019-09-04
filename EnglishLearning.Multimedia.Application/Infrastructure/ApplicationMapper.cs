@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 
 namespace EnglishLearning.Multimedia.Application.Infrastructure
 {
@@ -13,6 +13,6 @@ namespace EnglishLearning.Multimedia.Application.Infrastructure
                 .CreateMapper();
         }
 
-        public IMapper Mapper  => _mapper;
+        public IMapper Mapper => _mapper;
     }
 }

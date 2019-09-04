@@ -1,4 +1,4 @@
-namespace EnglishLearning.Multimedia.Application.Models.Filters
+﻿namespace EnglishLearning.Multimedia.Application.Models.Filters
 {
     public class EnglishTextFullFilterModel
     {

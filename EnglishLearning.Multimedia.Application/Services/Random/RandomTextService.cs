@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EnglishLearning.Multimedia.Application.Abstract;
@@ -22,7 +22,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishTextModel> englishTexts = await _textService.GetAllAsync();
             if (!englishTexts.Any())
+            {
                 return null;
+            }
 
             return englishTexts.GetRandomElement();
         }
@@ -31,7 +33,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByFilters(phrase, textTypes, englishLevels);
             if (!englishTexts.Any())
+            {
                 return null;
+            }
 
             return englishTexts.GetRandomElement();
         }
@@ -40,7 +44,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishTextModel> englishTexts = await _textService.GetAllAsync();
             if (!englishTexts.Any())
+            {
                 return englishTexts;
+            }
 
             return englishTexts.GetRandomCountOfElements(amount).ToList();
         }
@@ -49,7 +55,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishTextModel> englishTexts = await _textService.FindAllByFilters(phrase, textTypes, englishLevels);
             if (!englishTexts.Any())
+            {
                 return englishTexts;
+            }
 
             return englishTexts.GetRandomCountOfElements(amount).ToList();
         }

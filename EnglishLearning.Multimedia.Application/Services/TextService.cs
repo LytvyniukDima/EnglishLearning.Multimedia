@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract;
@@ -81,7 +81,9 @@ namespace EnglishLearning.Multimedia.Application.Services
             var englishLevelEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
             var englishTexts = await _englishTextRepository.FindAllByFilters(phrase, textTypes, englishLevelEntities);
             if (englishTexts == null)
+            {
                 return new List<EnglishTextModel>();
+            }
 
             return _mapper.Map<IReadOnlyList<EnglishTextModel>>(englishTexts);
         }
@@ -91,7 +93,9 @@ namespace EnglishLearning.Multimedia.Application.Services
             var englishLevelsEntities = _mapper.Map<EnglishLevel[]>(englishLevels);
             var englishTexts = await _englishTextRepository.FindAllInfoByFilters(phrase, textTypes, englishLevelsEntities);
             if (englishTexts == null)
+            {
                 return new List<EnglishTextInfoModel>();
+            }
 
             return _mapper.Map<IReadOnlyList<EnglishTextInfoModel>>(englishTexts);
         }

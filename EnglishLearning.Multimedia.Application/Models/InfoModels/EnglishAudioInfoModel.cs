@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using EnglishLearning.Multimedia.Application.Models.Enums;
 
 namespace EnglishLearning.Multimedia.Application.Models.InfoModels

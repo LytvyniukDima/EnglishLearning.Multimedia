@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EnglishLearning.Multimedia.Application.Abstract;
@@ -22,7 +22,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.GetAllAsync();
             if (!englishVideos.Any())
+            {
                 return null;
+            }
 
             return englishVideos.GetRandomElement();
         }
@@ -31,7 +33,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(phrase, videoTypes, englishLevels);
             if (!englishVideos.Any())
+            {
                 return null;
+            }
 
             return englishVideos.GetRandomElement();
         }
@@ -40,7 +44,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.GetAllAsync();
             if (!englishVideos.Any())
+            {
                 return englishVideos;
+            }
 
             return englishVideos.GetRandomCountOfElements(amount).ToList();
         }
@@ -49,7 +55,9 @@ namespace EnglishLearning.Multimedia.Application.Services.Random
         {
             IReadOnlyList<EnglishVideoModel> englishVideos = await _videoService.FindAllByFilters(phrase, videoTypes, englishLevels);
             if (!englishLevels.Any())
+            {
                 return englishVideos;
+            }
 
             return englishVideos.GetRandomCountOfElements(amount).ToList();
         }

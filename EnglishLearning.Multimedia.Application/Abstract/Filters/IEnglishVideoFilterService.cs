@@ -1,4 +1,4 @@
-using EnglishLearning.Multimedia.Application.Models.Filters;
+﻿using EnglishLearning.Multimedia.Application.Models.Filters;
 
 namespace EnglishLearning.Multimedia.Application.Abstract.Filters
 {
