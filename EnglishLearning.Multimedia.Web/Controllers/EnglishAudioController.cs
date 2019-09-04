@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -42,7 +42,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             EnglishAudioModel englishAudio = await _audioService.GetByIdAsync(id);
             if (englishAudio == null)
+            {
                 return NotFound();
+            }
 
             var englishAudioViewModel = _mapper.Map<EnglishAudioViewModel>(englishAudio);
             
@@ -69,8 +71,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _audioService.UpdateAsync(id, englishAudioCreateModel);
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -81,8 +85,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _audioService.DeleteByIdAsync(id);
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -93,8 +99,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _audioService.DeleteAllAsync();
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -109,7 +117,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             
             IReadOnlyList<EnglishAudioModel> englishAudioModels = await _audioService.FindAllByFilters(phrase, audioType, englishLevelModels);
             if (!englishAudioModels.Any())
+            {
                 return NotFound();
+            }
 
             var englishAudioViewModels = _mapper.Map<IEnumerable<EnglishAudioViewModel>>(englishAudioModels);
             

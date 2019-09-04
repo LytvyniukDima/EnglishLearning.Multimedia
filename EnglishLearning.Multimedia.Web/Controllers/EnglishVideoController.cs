@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -42,7 +42,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             EnglishVideoModel englishVideo = await _videoService.GetByIdAsync(id);
             if (englishVideo == null)
+            {
                 return NotFound();
+            }
 
             var englishVideoViewModel = _mapper.Map<EnglishVideoViewModel>(englishVideo);
             
@@ -69,8 +71,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _videoService.UpdateAsync(id, englishVideoCreateModel);
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -81,8 +85,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _videoService.DeleteByIdAsync(id);
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -93,8 +99,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _videoService.DeleteAllAsync();
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -109,7 +117,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             
             IReadOnlyList<EnglishVideoModel> englishVideoModels = await _videoService.FindAllByFilters(phrase, videoType, englishLevelModels);
             if (!englishVideoModels.Any())
+            {
                 return NotFound();
+            }
 
             var englishVideoViewModels = _mapper.Map<IEnumerable<EnglishVideoViewModel>>(englishVideoModels);
             

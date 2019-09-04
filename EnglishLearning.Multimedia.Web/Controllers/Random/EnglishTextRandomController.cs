@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract.Random;
@@ -7,7 +7,6 @@ using EnglishLearning.Multimedia.Application.Models.Enums;
 using EnglishLearning.Multimedia.Web.Infrastructure;
 using EnglishLearning.Multimedia.Web.ViewModels;
 using EnglishLearning.Multimedia.Web.ViewModels.Enums;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishLearning.Multimedia.Web.Controllers.Random
@@ -52,8 +51,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
 
             EnglishTextModel englishText = await _randomTextService.FindRandomByFiltersAsync(phrase, textType, englishLevelModels);
             if (englishText == null)
+            {
                 return NotFound();
-            
+            }
+
             var englishTextViewModel = _mapper.Map<EnglishTextViewModel>(englishText);
             
             return Ok(englishTextViewModel);
@@ -70,8 +71,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
 
             IReadOnlyList<EnglishTextModel> englishTexts = await _randomTextService.FindRandomAmountByFiltersAsync(amount, phrase, textType, englishLevelModels);
             if (englishTexts == null)
+            {
                 return NotFound();
-            
+            }
+
             var englishTextViewModels = _mapper.Map<IEnumerable<EnglishTextViewModel>>(englishTexts);
             
             return Ok(englishTextViewModels);

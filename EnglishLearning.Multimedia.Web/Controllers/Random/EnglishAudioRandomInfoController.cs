@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract.Random;
@@ -51,8 +51,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
 
             EnglishAudioInfoModel englishAudio = await _randomAudioInfoService.FindRandomInfoByFiltersAsync(phrase, audioType, englishLevelModels);
             if (englishAudio == null)
+            {
                 return NotFound();
-            
+            }
+
             var englishAudioViewModel = _mapper.Map<EnglishAudioInfoViewModel>(englishAudio);
             
             return Ok(englishAudioViewModel);
@@ -69,8 +71,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
 
             IReadOnlyList<EnglishAudioInfoModel> englishAudios = await _randomAudioInfoService.FindRandomAmountInfoByFiltersAsync(amount, phrase, audioType, englishLevelModels);
             if (englishAudios == null)
+            {
                 return NotFound();
-            
+            }
+
             var englishAudioViewModels = _mapper.Map<IEnumerable<EnglishAudioInfoViewModel>>(englishAudios);
             
             return Ok(englishAudioViewModels);

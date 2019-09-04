@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -38,7 +38,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
         {
             EnglishTextInfoModel englishText = await _textService.GetInfoByIdAsync(id);
             if (englishText == null)
+            {
                 return NotFound();
+            }
 
             var englishTextViewModel = _mapper.Map<EnglishTextInfoViewModel>(englishText);
             
@@ -55,7 +57,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
             
             IReadOnlyList<EnglishTextInfoModel> englishTextModels = await _textService.FindAllInfoByFilters(phrase, textType, englishLevelModels);
             if (!englishTextModels.Any())
+            {
                 return NotFound();
+            }
 
             var englishTextViewModels = _mapper.Map<IEnumerable<EnglishTextInfoViewModel>>(englishTextModels);
             

@@ -1,5 +1,4 @@
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract.Filters;
 using EnglishLearning.Multimedia.Application.Models.Filters;
 using EnglishLearning.Multimedia.Web.Infrastructure;
@@ -21,7 +20,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("player_types")]
-        public async Task<IActionResult> GetAudioPlayerTypeFilter()
+        public IActionResult GetAudioPlayerTypeFilter()
         {
             AudioPlayerTypeFilterModel filter = _filterService.GetAudioPlayerTypeFilter();
             var filterViewModels = _mapper.Map<AudioPlayerTypeFilterViewModel>(filter);
@@ -30,7 +29,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("types")]
-        public async Task<IActionResult> GetAudioTypeFilter()
+        public IActionResult GetAudioTypeFilter()
         {
             AudioTypeFilterModel filter = _filterService.GetAudioTypeFilter();
             var filterViewModels = _mapper.Map<AudioTypeFilterViewModel>(filter);
@@ -39,7 +38,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("english_levels")]
-        public async Task<IActionResult> GetEnglishLevelFilter()
+        public IActionResult GetEnglishLevelFilter()
         {
             EnglishLevelFilterModel filter = _filterService.GetEnglishLevelFilter();
             var filterViewModels = _mapper.Map<EnglishLevelFilterViewModel>(filter);
@@ -48,7 +47,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("full")]
-        public async Task<IActionResult> GetEnglishAudioFullFilter()
+        public IActionResult GetEnglishAudioFullFilter()
         {
             EnglishAudioFullFilterModel filter = _filterService.GetEnglishAudioFullFilter();
             var filterViewModels = _mapper.Map<EnglishAudioFullFilterViewModel>(filter);

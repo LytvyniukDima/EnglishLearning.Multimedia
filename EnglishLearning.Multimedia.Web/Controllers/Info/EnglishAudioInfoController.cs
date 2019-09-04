@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -23,7 +23,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
             _audioService = audioService;
             _mapper = webMapper.Mapper;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetAllInfo()
         {
@@ -32,19 +32,21 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
 
             return Ok(englishAudioViewModels);
         }
-        
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInfoById(string id)
         {
             EnglishAudioInfoModel englishAudio = await _audioService.GetInfoByIdAsync(id);
             if (englishAudio == null)
+            {
                 return NotFound();
+            }
 
             var englishAudioViewModel = _mapper.Map<EnglishAudioInfoViewModel>(englishAudio);
-            
+
             return Ok(englishAudioViewModel);
         }
-        
+
         [HttpGet("~/api/multimedia/search/info/audio")]
         public async Task<ActionResult> GetAllByFilter(
             [FromQuery] string phrase,
@@ -52,13 +54,15 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Info
             [FromQuery] EnglishLevelViewModel[] englishLevel)
         {
             var englishLevelModels = _mapper.Map<EnglishLevelModel[]>(englishLevel);
-            
+
             IReadOnlyList<EnglishAudioInfoModel> englishAudioModels = await _audioService.FindAllInfoByFilters(phrase, audioType, englishLevelModels);
             if (!englishAudioModels.Any())
+            {
                 return NotFound();
+            }
 
             var englishAudioViewModels = _mapper.Map<IEnumerable<EnglishAudioInfoViewModel>>(englishAudioModels);
-            
+
             return Ok(englishAudioViewModels);
         }
     }

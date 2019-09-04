@@ -1,5 +1,4 @@
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using EnglishLearning.Multimedia.Application.Abstract.Filters;
 using EnglishLearning.Multimedia.Application.Models.Filters;
 using EnglishLearning.Multimedia.Web.Infrastructure;
@@ -21,7 +20,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("types")]
-        public async Task<IActionResult> GetVideoTypeFilter()
+        public IActionResult GetVideoTypeFilter()
         {
             VideoTypeFilterModel filter = _filterService.GetVideoTypeFilter();
             var filterViewModels = _mapper.Map<VideoTypeFilterViewModel>(filter);
@@ -30,7 +29,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("english_levels")]
-        public async Task<IActionResult> GetEnglishLevelFilter()
+        public IActionResult GetEnglishLevelFilter()
         {
             EnglishLevelFilterModel filter = _filterService.GetEnglishLevelFilter();
             var filterViewModels = _mapper.Map<EnglishLevelFilterViewModel>(filter);
@@ -39,7 +38,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Filter
         }
         
         [HttpGet("full")]
-        public async Task<IActionResult> GetEnglishVideoFullFilter()
+        public IActionResult GetEnglishVideoFullFilter()
         {
             EnglishVideoFullFilterModel filter = _filterService.GetEnglishVideoFullFilter();
             var filterViewModels = _mapper.Map<EnglishVideoFullFilterViewModel>(filter);

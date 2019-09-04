@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -41,7 +41,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             EnglishTextModel englishText = await _textService.GetByIdAsync(id);
             if (englishText == null)
+            {
                 return NotFound();
+            }
 
             var englishTextViewModel = _mapper.Map<EnglishTextViewModel>(englishText);
             
@@ -68,8 +70,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _textService.UpdateAsync(id, englishTextCreateModel);
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -80,8 +84,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _textService.DeleteByIdAsync(id);
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -92,8 +98,10 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             bool result = await _textService.DeleteAllAsync();
 
             if (result == false)
+            {
                 return BadRequest();
-            
+            }
+
             return Ok();
         }
         
@@ -107,7 +115,9 @@ namespace EnglishLearning.Multimedia.Web.Controllers
             
             IReadOnlyList<EnglishTextModel> englishTextModels = await _textService.FindAllByFilters(phrase, textType, englishLevelModels);
             if (!englishTextModels.Any())
+            {
                 return NotFound();
+            }
 
             var englishTextViewModels = _mapper.Map<IEnumerable<EnglishTextViewModel>>(englishTextModels);
             

@@ -1,4 +1,4 @@
-namespace EnglishLearning.Multimedia.Web.ViewModels.Enums
+﻿namespace EnglishLearning.Multimedia.Web.ViewModels.Enums
 {
     public enum EnglishLevelViewModel
     {
@@ -7,6 +7,6 @@ namespace EnglishLearning.Multimedia.Web.ViewModels.Enums
         Intermediate,
         UpperIntermediate,
         Advanced,
-        None
+        None,
     }
 }

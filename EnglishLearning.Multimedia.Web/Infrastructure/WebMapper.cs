@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 
 namespace EnglishLearning.Multimedia.Web.Infrastructure
 {
