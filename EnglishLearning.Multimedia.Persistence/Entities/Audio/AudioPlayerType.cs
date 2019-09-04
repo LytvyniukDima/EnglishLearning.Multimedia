@@ -4,6 +4,6 @@
     {
         YouTube,
         SoundCloud,
-        MediaPlayer
+        MediaPlayer,
     }
 }

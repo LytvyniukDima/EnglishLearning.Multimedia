@@ -13,9 +13,9 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
 {
     public class EnglishTextMongoRepository : BaseStringIdWithInfoModelRepository<EnglishText, EnglishTextInfo>, IEnglishTextRepository
     {
-        public EnglishTextMongoRepository(MongoContext dbContext) : base(dbContext)
+        public EnglishTextMongoRepository(MongoContext mongoContext) 
+            : base(mongoContext)
         {
-            
         }
 
         protected override ProjectionDefinition<EnglishText, EnglishTextInfo> InfoModelProjectionDefinition
@@ -27,7 +27,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
                     Id = x.Id,
                     HeadLine = x.HeadLine,
                     TextType = x.TextType,
-                    EnglishLevel = x.EnglishLevel
+                    EnglishLevel = x.EnglishLevel,
                 });
         }
 
@@ -36,16 +36,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
             var builder = Builders<EnglishText>.Filter;
             var filter = builder.Empty;
 
-            if (!String.IsNullOrEmpty(phrase))
+            if (!string.IsNullOrEmpty(phrase))
             {
-                filter = builder.Or(Builders<EnglishText>.Filter.Regex(x => x.HeadLine, phrase), 
+                filter = builder.Or(
+                    Builders<EnglishText>.Filter.Regex(x => x.HeadLine, phrase), 
                     Builders<EnglishText>.Filter.Regex(x => x.Text, phrase));
             }
-            if (!textTypes.IsNullOrEmpty())
-                filter &= builder.In(x => x.TextType, textTypes);
-            if (!englishLevels.IsNullOrEmpty())
-                filter &= builder.In(x => x.EnglishLevel, englishLevels);
             
+            if (!textTypes.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.TextType, textTypes);
+            }
+
+            if (!englishLevels.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.EnglishLevel, englishLevels);
+            }
+
             return await _collection.Find(filter).ToListAsync();
         }
 
@@ -54,16 +61,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
             var builder = Builders<EnglishText>.Filter;
             var filter = builder.Empty;
 
-            if (!String.IsNullOrEmpty(phrase))
+            if (!string.IsNullOrEmpty(phrase))
             {
-                filter = builder.Or(Builders<EnglishText>.Filter.Regex(x => x.HeadLine, phrase), 
+                filter = builder.Or(
+                    Builders<EnglishText>.Filter.Regex(x => x.HeadLine, phrase), 
                     Builders<EnglishText>.Filter.Regex(x => x.Text, phrase));
             }
-            if (!textTypes.IsNullOrEmpty())
-                filter &= builder.In(x => x.TextType, textTypes);
-            if (!englishLevels.IsNullOrEmpty())
-                filter &= builder.In(x => x.EnglishLevel, englishLevels);
             
+            if (!textTypes.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.TextType, textTypes);
+            }
+
+            if (!englishLevels.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.EnglishLevel, englishLevels);
+            }
+
             return await _collection
                 .Find(filter)
                 .Project(InfoModelProjectionDefinition)

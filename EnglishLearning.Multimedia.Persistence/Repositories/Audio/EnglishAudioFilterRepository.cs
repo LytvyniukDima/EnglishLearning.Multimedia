@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using EnglishLearning.Multimedia.Persistence.Abstract;
 using EnglishLearning.Multimedia.Persistence.Entities;
 using EnglishLearning.Multimedia.Persistence.Entities.Audio;
@@ -9,13 +9,13 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
 {
     public class EnglishAudioFilterRepository : IEnglishAudioFiltersRepository
     {
-        protected readonly MongoContext _dbContext;
+        protected readonly MongoContext _mongoContext;
         protected readonly IMongoCollection<EnglishAudio> _collection;
 
-        public EnglishAudioFilterRepository(MongoContext dbContext)
+        public EnglishAudioFilterRepository(MongoContext mongoContext)
         {
-            _dbContext = dbContext;
-            _collection = _dbContext.GetCollection<EnglishAudio>();
+            _mongoContext = mongoContext;
+            _collection = _mongoContext.GetCollection<EnglishAudio>();
         }
 
         public AudioPlayerTypeFilter GetAudioPlayerTypeFilter()
@@ -25,7 +25,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
                 .Group(x => x.AudioPlayerType, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key, x => x.Value);
@@ -42,7 +42,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
                 .Group(x => x.AudioType, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key ?? string.Empty, x => x.Value);
@@ -59,7 +59,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
                 .Group(x => x.EnglishLevel, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key, x => x.Value);
@@ -75,7 +75,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
             {
                 EnglishLevelFilterOptions = GetEnglishLevelFilter(),
                 AudioTypeFilterOptions = GetAudioTypeFilter(),
-                AudioPlayerFilterOptions = GetAudioPlayerTypeFilter()
+                AudioPlayerFilterOptions = GetAudioPlayerTypeFilter(),
             };
             
             return englishAudioFullFilter;

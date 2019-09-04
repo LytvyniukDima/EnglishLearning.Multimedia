@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using EnglishLearning.Multimedia.Persistence.Abstract;
 using EnglishLearning.Multimedia.Persistence.Entities;
 using EnglishLearning.Multimedia.Persistence.Entities.Text;
@@ -9,13 +9,13 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
 {
     public class EnglishTextFilterRepository : IEnglishTextFiltersRepository
     {
-        protected readonly MongoContext _dbContext;
+        protected readonly MongoContext _mongoContext;
         protected readonly IMongoCollection<EnglishText> _collection;
         
-        public EnglishTextFilterRepository(MongoContext dbContext)
+        public EnglishTextFilterRepository(MongoContext mongoContext)
         {
-            _dbContext = dbContext;
-            _collection = _dbContext.GetCollection<EnglishText>();
+            _mongoContext = mongoContext;
+            _collection = _mongoContext.GetCollection<EnglishText>();
         }
         
         public TextTypeFilter GetTextTypeFilter()
@@ -25,7 +25,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
                 .Group(x => x.TextType, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key ?? string.Empty, x => x.Value);
@@ -42,7 +42,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
                 .Group(x => x.EnglishLevel, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key, x => x.Value);
@@ -57,7 +57,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
             var englishTextFullFilter = new EnglishTextFullFilter
             {
                 TextTypeFilterOptions = GetTextTypeFilter(),
-                EnglishLevelFilterOptions = GetEnglishLevelFilter()
+                EnglishLevelFilterOptions = GetEnglishLevelFilter(),
             };
 
             return englishTextFullFilter;

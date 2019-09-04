@@ -13,9 +13,9 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
 {
     public class EnglishVideoMongoRepository : BaseStringIdWithInfoModelRepository<EnglishVideo, EnglishVideoInfo>, IEnglishVideoRepository
     {
-        public EnglishVideoMongoRepository(MongoContext dbContext) : base(dbContext)
+        public EnglishVideoMongoRepository(MongoContext mongoContext) 
+            : base(mongoContext)
         {
-            
         }
 
         protected override ProjectionDefinition<EnglishVideo, EnglishVideoInfo> InfoModelProjectionDefinition
@@ -27,7 +27,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
                     Id = x.Id,
                     Title = x.Title,
                     VideoType = x.VideoType,
-                    EnglishLevel = x.EnglishLevel
+                    EnglishLevel = x.EnglishLevel,
                 });
         }
 
@@ -36,16 +36,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
             var builder = Builders<EnglishVideo>.Filter;
             var filter = builder.Empty;
 
-            if (!String.IsNullOrEmpty(phrase))
+            if (!string.IsNullOrEmpty(phrase))
             {
-                filter = builder.Or(Builders<EnglishVideo>.Filter.Regex(x => x.Title, phrase), 
+                filter = builder.Or(
+                    Builders<EnglishVideo>.Filter.Regex(x => x.Title, phrase), 
                     Builders<EnglishVideo>.Filter.Regex(x => x.Transcription, phrase));
             }
-            if (!videoTypes.IsNullOrEmpty())
-                filter &= builder.In(x => x.VideoType, videoTypes);
-            if (!englishLevels.IsNullOrEmpty())
-                filter &= builder.In(x => x.EnglishLevel, englishLevels);
             
+            if (!videoTypes.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.VideoType, videoTypes);
+            }
+
+            if (!englishLevels.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.EnglishLevel, englishLevels);
+            }
+
             return await _collection.Find(filter).ToListAsync();
         }
 
@@ -54,16 +61,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
             var builder = Builders<EnglishVideo>.Filter;
             var filter = builder.Empty;
 
-            if (!String.IsNullOrEmpty(phrase))
+            if (!string.IsNullOrEmpty(phrase))
             {
-                filter = builder.Or(Builders<EnglishVideo>.Filter.Regex(x => x.Title, phrase), 
+                filter = builder.Or(
+                    Builders<EnglishVideo>.Filter.Regex(x => x.Title, phrase), 
                     Builders<EnglishVideo>.Filter.Regex(x => x.Transcription, phrase));
             }
-            if (!videoTypes.IsNullOrEmpty())
-                filter &= builder.In(x => x.VideoType, videoTypes);
-            if (!englishLevels.IsNullOrEmpty())
-                filter &= builder.In(x => x.EnglishLevel, englishLevels);
             
+            if (!videoTypes.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.VideoType, videoTypes);
+            }
+
+            if (!englishLevels.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.EnglishLevel, englishLevels);
+            }
+
             return await _collection
                 .Find(filter)
                 .Project(InfoModelProjectionDefinition)

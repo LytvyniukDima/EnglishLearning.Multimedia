@@ -37,7 +37,7 @@ namespace EnglishLearning.Multimedia.Persistence.Configuration
                 .AddMongoCollectionNamesProvider(x => 
                 {
                     x.Add<EnglishAudio>("EnglishMultimedia_EnglishAudio");
-                    x.Add<EnglishVideo>( "EnglishMultimedia_EnglishVideo");
+                    x.Add<EnglishVideo>("EnglishMultimedia_EnglishVideo");
                     x.Add<EnglishText>("EnglishMultimedia_EnglishText");
                 });
             

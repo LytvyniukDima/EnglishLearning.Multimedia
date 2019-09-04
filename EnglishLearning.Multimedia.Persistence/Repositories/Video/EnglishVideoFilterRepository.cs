@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using EnglishLearning.Multimedia.Persistence.Abstract;
 using EnglishLearning.Multimedia.Persistence.Entities;
 using EnglishLearning.Multimedia.Persistence.Entities.Video;
@@ -9,13 +9,13 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
 {
     public class EnglishVideoFilterRepository : IEnglishVideoFiltersRepository
     {
-        protected readonly MongoContext _dbContext;
+        protected readonly MongoContext _mongoContext;
         protected readonly IMongoCollection<EnglishVideo> _collection;
         
-        public EnglishVideoFilterRepository(MongoContext dbContext)
+        public EnglishVideoFilterRepository(MongoContext mongoContext)
         {
-            _dbContext = dbContext;
-            _collection = _dbContext.GetCollection<EnglishVideo>();
+            _mongoContext = mongoContext;
+            _collection = _mongoContext.GetCollection<EnglishVideo>();
         }
         
         public VideoTypeFilter GetVideoTypeFilter()
@@ -25,7 +25,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
                 .Group(x => x.VideoType, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key ?? string.Empty, x => x.Value);
@@ -42,7 +42,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
                 .Group(x => x.EnglishLevel, group => new
                 {
                     Key = group.Key,
-                    Value = group.Count()
+                    Value = group.Count(),
                 })
                 .ToEnumerable()
                 .ToDictionary(x => x.Key, x => x.Value);
@@ -57,7 +57,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
             var englishVideoFullFilter = new EnglishVideoFullFilter
             {
                 VideoTypeFilterResult = GetVideoTypeFilter(),
-                EnglishLevelFilterResult = GetEnglishLevelFilter()
+                EnglishLevelFilterResult = GetEnglishLevelFilter(),
             };
 
             return englishVideoFullFilter;

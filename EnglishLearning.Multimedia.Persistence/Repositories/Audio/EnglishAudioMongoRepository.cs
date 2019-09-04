@@ -13,9 +13,9 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
 {
     public class EnglishAudioMongoRepository : BaseStringIdWithInfoModelRepository<EnglishAudio, EnglishAudioInfo>, IEnglishAudioRepository
     {
-        public EnglishAudioMongoRepository(MongoContext dbContext) : base(dbContext)
+        public EnglishAudioMongoRepository(MongoContext mongoContext) 
+            : base(mongoContext)
         {
-            
         }
 
         protected override ProjectionDefinition<EnglishAudio, EnglishAudioInfo> InfoModelProjectionDefinition
@@ -29,9 +29,8 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
                     Duration = x.Duration,
                     AudioType = x.AudioType,
                     EnglishLevel = x.EnglishLevel,
-                    AudioPlayerType = x.AudioPlayerType
+                    AudioPlayerType = x.AudioPlayerType,
                 });
-            
         }
 
         public async Task<IReadOnlyList<EnglishAudio>> FindAllByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels)
@@ -39,16 +38,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
             var builder = Builders<EnglishAudio>.Filter;
             var filter = builder.Empty;
 
-            if (!String.IsNullOrEmpty(phrase))
+            if (!string.IsNullOrEmpty(phrase))
             {
-                filter = builder.Or(Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase),
+                filter = builder.Or(
+                    Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase),
                     Builders<EnglishAudio>.Filter.Regex(x => x.Transcription, phrase));
             }
+            
             if (!audioTypes.IsNullOrEmpty())
+            {
                 filter &= builder.In(x => x.AudioType, audioTypes);
+            }
+
             if (!englishLevels.IsNullOrEmpty())
+            {
                 filter &= builder.In(x => x.EnglishLevel, englishLevels);
-                         
+            }
+
             return await _collection.Find(filter).ToListAsync(); 
         }
 
@@ -57,16 +63,23 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
             var builder = Builders<EnglishAudio>.Filter;
             var filter = builder.Empty;
 
-            if (!String.IsNullOrEmpty(phrase))
+            if (!string.IsNullOrEmpty(phrase))
             {
-                filter = builder.Or(Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase),
+                filter = builder.Or(
+                    Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase),
                     Builders<EnglishAudio>.Filter.Regex(x => x.Transcription, phrase));
             }
-            if (!audioTypes.IsNullOrEmpty())
-                filter &= builder.In(x => x.AudioType, audioTypes);
-            if (!englishLevels.IsNullOrEmpty())
-                filter &= builder.In(x => x.EnglishLevel, englishLevels);
             
+            if (!audioTypes.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.AudioType, audioTypes);
+            }
+
+            if (!englishLevels.IsNullOrEmpty())
+            {
+                filter &= builder.In(x => x.EnglishLevel, englishLevels);
+            }
+
             return await _collection
                 .Find(filter)
                 .Project(InfoModelProjectionDefinition)

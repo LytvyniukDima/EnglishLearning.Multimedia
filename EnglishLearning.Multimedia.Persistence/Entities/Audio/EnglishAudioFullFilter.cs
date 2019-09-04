@@ -1,4 +1,4 @@
-namespace EnglishLearning.Multimedia.Persistence.Entities.Audio
+﻿namespace EnglishLearning.Multimedia.Persistence.Entities.Audio
 {
     public class EnglishAudioFullFilter
     {

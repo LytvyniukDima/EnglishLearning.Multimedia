@@ -1,4 +1,4 @@
-namespace EnglishLearning.Multimedia.Persistence.Entities.Text
+﻿namespace EnglishLearning.Multimedia.Persistence.Entities.Text
 {
     public class EnglishTextFullFilter
     {

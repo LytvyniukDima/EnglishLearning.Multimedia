@@ -7,6 +7,6 @@
         Intermediate,
         UpperIntermediate,
         Advanced,
-        None
+        None,
     }
 }

@@ -1,4 +1,4 @@
-namespace EnglishLearning.Multimedia.Persistence.Entities.Video
+﻿namespace EnglishLearning.Multimedia.Persistence.Entities.Video
 {
     public class EnglishVideoFullFilter
     {
