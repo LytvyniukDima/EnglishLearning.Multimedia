@@ -1,0 +1,39 @@
+# Xamarin.Android
+# Build a Xamarin.Android project.
+# Add steps that test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- master
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildAndAnalyze
+        displayName: Build And Analyze
+        pool:
+          vmImage: 'windows-latest'
+        variables:
+          buildConfiguration: 'Release'
+        steps:
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'restore'
+              feedsToUse: 'select'
+              vstsFeed: '57390d4c-b427-4705-a39a-925bdee8f9bf'
+          - task: SonarQubePrepare@4
+            inputs:
+              SonarQube: 'sonarqube'
+              scannerMode: 'MSBuild'
+              projectKey: 'EnglishLearning.Multimedia'
+              projectName: 'EnglishLearning.Multimedia'
+              extraProperties: |
+                sonar.sources="$(System.DefaultWorkingDirectory)/_LytvyniukDima_EnglishLearning.Multimedia/."
+                sonar.projectbasedir="$(System.DefaultWorkingDirectory)/_LytvyniukDima_EnglishLearning.Multimedia/."
+          - task: MSBuild@1
+            inputs:
+              solution: '**/*.sln'
+          - task: SonarQubeAnalyze@4
+          - task: SonarQubePublish@4
+            inputs:
+              pollingTimeoutSec: '300'
