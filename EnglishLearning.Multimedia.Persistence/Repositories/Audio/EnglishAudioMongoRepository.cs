@@ -34,30 +34,22 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
 
         public async Task<IReadOnlyList<EnglishAudio>> FindAllByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels)
         {
-            var builder = Builders<EnglishAudio>.Filter;
-            var filter = builder.Empty;
-
-            if (!string.IsNullOrEmpty(phrase))
-            {
-                filter = builder.Or(
-                    Builders<EnglishAudio>.Filter.Regex(x => x.Tittle, phrase),
-                    Builders<EnglishAudio>.Filter.Regex(x => x.Transcription, phrase));
-            }
-            
-            if (!audioTypes.IsNullOrEmpty())
-            {
-                filter &= builder.In(x => x.AudioType, audioTypes);
-            }
-
-            if (!englishLevels.IsNullOrEmpty())
-            {
-                filter &= builder.In(x => x.EnglishLevel, englishLevels);
-            }
+            var filter = BuildFilter(phrase, audioTypes, englishLevels);
 
             return await _collection.Find(filter).ToListAsync(); 
         }
 
         public async Task<IReadOnlyList<EnglishAudioInfo>> FindAllInfoByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels)
+        {
+            var filter = BuildFilter(phrase, audioTypes, englishLevels);
+
+            return await _collection
+                .Find(filter)
+                .Project(InfoModelProjectionDefinition)
+                .ToListAsync();
+        }
+
+        public FilterDefinition<EnglishAudio> BuildFilter(string phrase, string[] audioTypes, EnglishLevel[] englishLevels)
         {
             var builder = Builders<EnglishAudio>.Filter;
             var filter = builder.Empty;
@@ -79,10 +71,7 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
                 filter &= builder.In(x => x.EnglishLevel, englishLevels);
             }
 
-            return await _collection
-                .Find(filter)
-                .Project(InfoModelProjectionDefinition)
-                .ToListAsync();
+            return filter;
         }
     }
 }
