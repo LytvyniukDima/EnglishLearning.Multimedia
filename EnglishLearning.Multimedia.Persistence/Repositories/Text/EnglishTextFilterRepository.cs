@@ -9,8 +9,8 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
 {
     public class EnglishTextFilterRepository : IEnglishTextFiltersRepository
     {
-        protected readonly MongoContext _mongoContext;
-        protected readonly IMongoCollection<EnglishText> _collection;
+        private readonly MongoContext _mongoContext;
+        private readonly IMongoCollection<EnglishText> _collection;
         
         public EnglishTextFilterRepository(MongoContext mongoContext)
         {

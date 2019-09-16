@@ -9,8 +9,8 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
 {
     public class EnglishAudioFilterRepository : IEnglishAudioFiltersRepository
     {
-        protected readonly MongoContext _mongoContext;
-        protected readonly IMongoCollection<EnglishAudio> _collection;
+        private readonly MongoContext _mongoContext;
+        private readonly IMongoCollection<EnglishAudio> _collection;
 
         public EnglishAudioFilterRepository(MongoContext mongoContext)
         {

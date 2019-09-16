@@ -41,8 +41,6 @@ namespace EnglishLearning.Multimedia.Application.Services
         public async Task<EnglishAudioModel> GetByIdAsync(string id)
         {
             var englishAudio = await _englishAudioRepository.FindAsync(x => x.Id == id);
-            
-            // TODO: Throw NotFoundException
             if (englishAudio == null)
             {
                 return null;

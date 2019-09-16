@@ -70,7 +70,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
 
             bool result = await _videoService.UpdateAsync(id, englishVideoCreateModel);
 
-            if (result == false)
+            if (!result)
             {
                 return BadRequest();
             }
@@ -84,7 +84,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             bool result = await _videoService.DeleteByIdAsync(id);
 
-            if (result == false)
+            if (!result)
             {
                 return BadRequest();
             }
@@ -98,7 +98,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             bool result = await _videoService.DeleteAllAsync();
 
-            if (result == false)
+            if (!result)
             {
                 return BadRequest();
             }

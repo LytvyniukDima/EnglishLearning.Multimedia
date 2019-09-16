@@ -38,7 +38,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             IReadOnlyList<EnglishTextInfoModel> englishTexts = await _randomTextInfoService.GetRandomAmountInfoFromAllAsync(amount);
             var englishTextViewModels = _mapper.Map<IEnumerable<EnglishTextInfoViewModel>>(englishTexts);
 
-            return Ok(englishTexts);
+            return Ok(englishTextViewModels);
         }
 
         [HttpGet("~/api/multimedia/random/info/search/text")]

@@ -38,7 +38,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers.Random
             IReadOnlyList<EnglishVideoModel> englishVideos = await _randomVideoService.GetRandomAmountFromAllAsync(amount);
             var englishVideoViewModels = _mapper.Map<IEnumerable<EnglishVideoViewModel>>(englishVideos);
 
-            return Ok(englishVideos);
+            return Ok(englishVideoViewModels);
         }
 
         [HttpGet("~/api/multimedia/random/search/video")]

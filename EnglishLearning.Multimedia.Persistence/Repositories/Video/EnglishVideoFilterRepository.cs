@@ -9,8 +9,8 @@ namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
 {
     public class EnglishVideoFilterRepository : IEnglishVideoFiltersRepository
     {
-        protected readonly MongoContext _mongoContext;
-        protected readonly IMongoCollection<EnglishVideo> _collection;
+        private readonly MongoContext _mongoContext;
+        private readonly IMongoCollection<EnglishVideo> _collection;
         
         public EnglishVideoFilterRepository(MongoContext mongoContext)
         {

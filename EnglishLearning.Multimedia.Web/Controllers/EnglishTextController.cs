@@ -69,7 +69,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
 
             bool result = await _textService.UpdateAsync(id, englishTextCreateModel);
 
-            if (result == false)
+            if (!result)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             bool result = await _textService.DeleteByIdAsync(id);
 
-            if (result == false)
+            if (!result)
             {
                 return BadRequest();
             }
@@ -97,7 +97,7 @@ namespace EnglishLearning.Multimedia.Web.Controllers
         {
             bool result = await _textService.DeleteAllAsync();
 
-            if (result == false)
+            if (!result)
             {
                 return BadRequest();
             }

@@ -9,8 +9,8 @@ namespace EnglishLearning.Multimedia.Application.Abstract
 {
     public interface IVideoService
     {
-        Task CreateAsync(EnglishVideoCreateModel englishTextCreateModel);
-        Task<bool> UpdateAsync(string id, EnglishVideoModel englishTextModel);
+        Task CreateAsync(EnglishVideoCreateModel englishVideoCreateModel);
+        Task<bool> UpdateAsync(string id, EnglishVideoModel englishVideoModel);
         Task<EnglishVideoModel> GetByIdAsync(string id);
         Task<IReadOnlyList<EnglishVideoModel>> GetAllAsync();
         Task<bool> DeleteByIdAsync(string id);
