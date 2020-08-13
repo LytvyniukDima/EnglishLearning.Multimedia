@@ -6,6 +6,7 @@ using EnglishLearning.Multimedia.Web.ViewModels;
 using EnglishLearning.Multimedia.Web.ViewModels.Create;
 using EnglishLearning.Multimedia.Web.ViewModels.Filters;
 using EnglishLearning.Multimedia.Web.ViewModels.Info;
+using EnglishLearning.Utilities.Linq.Extensions;
 
 namespace EnglishLearning.Multimedia.Web.Infrastructure
 {
@@ -23,9 +24,11 @@ namespace EnglishLearning.Multimedia.Web.Infrastructure
 
         private void EnglishAudioMapperConfiguration()
         {
-            CreateMap<AudioPlayerTypeFilterModel, AudioPlayerTypeFilterViewModel>();
-            CreateMap<AudioPlayerTypeFilterViewModel, AudioPlayerTypeFilterModel>();
-            
+            CreateMap<AudioPlayerTypeFilterModel, AudioPlayerTypeFilterViewModel>()
+                .ForMember(
+                    x => x.FilterOptions,
+                    opt => opt.MapFrom(x => x.FilterOptions.ConvertToStringKeyDictionary()));
+
             CreateMap<AudioTypeFilterModel, AudioTypeFilterViewModel>();
             CreateMap<AudioTypeFilterViewModel, AudioTypeFilterModel>();
             
@@ -44,9 +47,11 @@ namespace EnglishLearning.Multimedia.Web.Infrastructure
 
         private void EnglishTextMapperConfiguration()
         {            
-            CreateMap<TextTypeFilterModel, TextTypeFilterViewModel>();
-            CreateMap<TextTypeFilterViewModel, TextTypeFilterModel>();
-            
+            CreateMap<TextTypeFilterModel, TextTypeFilterViewModel>()
+                .ForMember(
+                    x => x.FilterOptions,
+                    opt => opt.MapFrom(x => x.FilterOptions.ConvertToStringKeyDictionary()));
+
             CreateMap<EnglishTextModel, EnglishTextViewModel>();
             CreateMap<EnglishTextViewModel, EnglishTextModel>();
             CreateMap<EnglishTextModel, EnglishTextInfoViewModel>();
@@ -63,8 +68,7 @@ namespace EnglishLearning.Multimedia.Web.Infrastructure
         private void EnglishVideoMapperConfiguration()
         {
             CreateMap<VideoTypeFilterModel, VideoTypeFilterViewModel>();
-            CreateMap<VideoTypeFilterViewModel, VideoTypeFilterModel>();
-            
+
             CreateMap<EnglishVideoModel, EnglishVideoViewModel>();
             CreateMap<EnglishVideoViewModel, EnglishVideoModel>();
             CreateMap<EnglishVideoModel, EnglishVideoInfoViewModel>();

@@ -5,6 +5,6 @@ namespace EnglishLearning.Multimedia.Web.ViewModels.Filters
 {
     public class EnglishLevelFilterViewModel
     {
-        public Dictionary<EnglishLevelViewModel, int> FilterOptions { get; set; }
+        public Dictionary<string, int> FilterOptions { get; set; }
     }
 }

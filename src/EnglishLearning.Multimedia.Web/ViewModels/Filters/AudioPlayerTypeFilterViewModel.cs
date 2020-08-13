@@ -5,6 +5,6 @@ namespace EnglishLearning.Multimedia.Web.ViewModels.Filters
 {
     public class AudioPlayerTypeFilterViewModel
     {
-        public Dictionary<AudioPlayerTypeViewModel, int> FilterOptions { get; set; }
+        public Dictionary<string, int> FilterOptions { get; set; }
     }
 }
