@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using EnglishLearning.Multimedia.Application.Models;
+using EnglishLearning.Multimedia.Application.Models.CreateModels;
+using EnglishLearning.Multimedia.Application.Models.Enums;
 using EnglishLearning.Multimedia.Application.Models.Filters;
 using EnglishLearning.Multimedia.Application.Models.InfoModels;
 using EnglishLearning.Multimedia.Web.ViewModels;
 using EnglishLearning.Multimedia.Web.ViewModels.Create;
+using EnglishLearning.Multimedia.Web.ViewModels.Enums;
 using EnglishLearning.Multimedia.Web.ViewModels.Filters;
 using EnglishLearning.Multimedia.Web.ViewModels.Info;
 using EnglishLearning.Utilities.Linq.Extensions;
@@ -42,7 +45,7 @@ namespace EnglishLearning.Multimedia.Web.Infrastructure
             CreateMap<EnglishAudioInfoModel, EnglishAudioInfoViewModel>();
             CreateMap<EnglishAudioInfoViewModel, EnglishAudioInfoModel>();
 
-            CreateMap<EnglishAudioCreateViewModel, EnglishAudioModel>();
+            CreateMap<EnglishAudioCreateViewModel, EnglishAudioCreateModel>();
         }
 
         private void EnglishTextMapperConfiguration()
@@ -62,7 +65,7 @@ namespace EnglishLearning.Multimedia.Web.Infrastructure
             CreateMap<EnglishTextInfoModel, EnglishTextInfoViewModel>();
             CreateMap<EnglishTextInfoViewModel, EnglishTextInfoModel>();
 
-            CreateMap<EnglishTextCreateViewModel, EnglishTextModel>();
+            CreateMap<EnglishTextCreateViewModel, EnglishTextCreateModel>();
         }
 
         private void EnglishVideoMapperConfiguration()
@@ -79,7 +82,7 @@ namespace EnglishLearning.Multimedia.Web.Infrastructure
             CreateMap<EnglishVideoInfoModel, EnglishVideoInfoViewModel>();
             CreateMap<EnglishVideoInfoViewModel, EnglishVideoInfoModel>();
 
-            CreateMap<EnglishVideoCreateViewModel, EnglishVideoModel>();
+            CreateMap<EnglishVideoCreateViewModel, EnglishVideoCreateModel>();
         }
     }
 }
