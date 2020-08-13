@@ -2,9 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="EnglishLearning.Utilities.General">
       <Version>1.2.0-151155574</Version>
@@ -27,5 +25,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnglishLearning.Multimedia.Web\EnglishLearning.Multimedia.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.json" CopyToOutputDirectory="Always" />
+    <None Include="appsettings.Development.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
