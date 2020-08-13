@@ -10,7 +10,7 @@ using MongoDB.Driver;
 
 namespace EnglishLearning.Multimedia.Persistence.Repositories.Video
 {
-    public class EnglishVideoMongoRepository : BaseStringIdWithInfoModelRepository<EnglishVideo, EnglishVideoInfo>, IEnglishVideoRepository
+    public class EnglishVideoMongoRepository : BaseMongoWithInfoModelRepository<EnglishVideo, EnglishVideoInfo, string>, IEnglishVideoRepository
     {
         public EnglishVideoMongoRepository(MongoContext mongoContext) 
             : base(mongoContext)

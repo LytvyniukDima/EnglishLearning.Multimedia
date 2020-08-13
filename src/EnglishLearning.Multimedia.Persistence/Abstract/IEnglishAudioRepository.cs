@@ -6,7 +6,7 @@ using EnglishLearning.Utilities.Persistence.Interfaces;
 
 namespace EnglishLearning.Multimedia.Persistence.Abstract
 {
-    public interface IEnglishAudioRepository : IBaseWithInfoModelRepository<EnglishAudio, EnglishAudioInfo>
+    public interface IEnglishAudioRepository : IBaseWithInfoModelRepository<EnglishAudio, EnglishAudioInfo, string>
     {
         Task<IReadOnlyList<EnglishAudio>> FindAllByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels);
         Task<IReadOnlyList<EnglishAudioInfo>> FindAllInfoByFilters(string phrase, string[] audioTypes, EnglishLevel[] englishLevels);

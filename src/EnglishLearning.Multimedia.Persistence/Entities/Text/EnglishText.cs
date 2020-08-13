@@ -1,10 +1,10 @@
-﻿using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
+﻿using EnglishLearning.Utilities.Persistence.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace EnglishLearning.Multimedia.Persistence.Entities.Text
 {
-    public class EnglishText : IStringIdEntity
+    public class EnglishText : IEntity<string>
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }

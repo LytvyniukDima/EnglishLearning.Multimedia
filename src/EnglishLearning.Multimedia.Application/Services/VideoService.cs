@@ -34,8 +34,9 @@ namespace EnglishLearning.Multimedia.Application.Services
         public async Task<bool> UpdateAsync(string id, EnglishVideoModel englishVideoModel)
         {
             var englishVideo = _mapper.Map<EnglishVideo>(englishVideoModel);
-
-            return await _englishVideoRepository.UpdateAsync(id, englishVideo);
+            englishVideo.Id = id;
+            
+            return await _englishVideoRepository.UpdateAsync(englishVideo);
         }
 
         public async Task<EnglishVideoModel> GetByIdAsync(string id)

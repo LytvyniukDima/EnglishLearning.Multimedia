@@ -1,10 +1,10 @@
-﻿using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
+﻿using EnglishLearning.Utilities.Persistence.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace EnglishLearning.Multimedia.Persistence.Entities.Video
 {
-    public class EnglishVideo : IStringIdEntity
+    public class EnglishVideo : IEntity<string>
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }

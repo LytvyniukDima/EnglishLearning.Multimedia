@@ -10,7 +10,7 @@ using MongoDB.Driver;
 
 namespace EnglishLearning.Multimedia.Persistence.Repositories.Text
 {
-    public class EnglishTextMongoRepository : BaseStringIdWithInfoModelRepository<EnglishText, EnglishTextInfo>, IEnglishTextRepository
+    public class EnglishTextMongoRepository : BaseMongoWithInfoModelRepository<EnglishText, EnglishTextInfo, string>, IEnglishTextRepository
     {
         public EnglishTextMongoRepository(MongoContext mongoContext)
             : base(mongoContext)

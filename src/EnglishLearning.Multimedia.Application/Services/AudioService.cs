@@ -34,8 +34,9 @@ namespace EnglishLearning.Multimedia.Application.Services
         public async Task<bool> UpdateAsync(string id, EnglishAudioModel englishAudioModel)
         {
             var englishAudio = _mapper.Map<EnglishAudio>(englishAudioModel);
-
-            return await _englishAudioRepository.UpdateAsync(id, englishAudio);
+            englishAudio.Id = id;
+            
+            return await _englishAudioRepository.UpdateAsync(englishAudio);
         }
 
         public async Task<EnglishAudioModel> GetByIdAsync(string id)

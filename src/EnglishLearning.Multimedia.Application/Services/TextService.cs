@@ -34,8 +34,9 @@ namespace EnglishLearning.Multimedia.Application.Services
         public async Task<bool> UpdateAsync(string id, EnglishTextModel englishTextModel)
         {
             var englishText = _mapper.Map<EnglishText>(englishTextModel);
-
-            return await _englishTextRepository.UpdateAsync(id, englishText);
+            englishText.Id = id;
+            
+            return await _englishTextRepository.UpdateAsync(englishText);
         }
 
         public async Task<EnglishTextModel> GetByIdAsync(string id)

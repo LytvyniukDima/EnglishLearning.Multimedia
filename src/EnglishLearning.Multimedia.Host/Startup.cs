@@ -1,4 +1,5 @@
-﻿using EnglishLearning.Multimedia.Application.Configuration;
+﻿using System.Text.Json.Serialization;
+using EnglishLearning.Multimedia.Application.Configuration;
 using EnglishLearning.Multimedia.Host.Infrastructure;
 using EnglishLearning.Multimedia.Persistence.Configuration;
 using EnglishLearning.Multimedia.Web.Configuration;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Converters;
 
 namespace EnglishLearning.Multimedia.Host
@@ -32,18 +34,17 @@ namespace EnglishLearning.Multimedia.Host
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials()
                         .WithExposedHeaders("Authorization"));
             });
 
             services
-                .AddMvc(options =>
+                .AddControllers(options =>
                 {
                     options.AddEnglishLearningIdentityFilters();
                 })
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
             
             services
@@ -57,7 +58,7 @@ namespace EnglishLearning.Multimedia.Host
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -68,7 +69,9 @@ namespace EnglishLearning.Multimedia.Host
             
             app.UseCors("CorsPolicy");
             app.UseSwaggerDocumentation();
-            app.UseMvc();
+            
+            app.UseRouting();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

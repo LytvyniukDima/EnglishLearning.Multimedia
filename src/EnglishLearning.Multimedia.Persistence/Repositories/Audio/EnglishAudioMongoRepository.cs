@@ -10,7 +10,7 @@ using MongoDB.Driver;
 
 namespace EnglishLearning.Multimedia.Persistence.Repositories.Audio
 {
-    public class EnglishAudioMongoRepository : BaseStringIdWithInfoModelRepository<EnglishAudio, EnglishAudioInfo>, IEnglishAudioRepository
+    public class EnglishAudioMongoRepository : BaseMongoWithInfoModelRepository<EnglishAudio, EnglishAudioInfo, string>, IEnglishAudioRepository
     {
         public EnglishAudioMongoRepository(MongoContext mongoContext) 
             : base(mongoContext)

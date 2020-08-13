@@ -1,11 +1,11 @@
 ﻿using System;
-using EnglishLearning.Utilities.Persistence.Mongo.Interfaces;
+using EnglishLearning.Utilities.Persistence.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace EnglishLearning.Multimedia.Persistence.Entities.Audio
 {
-    public class EnglishAudio : IStringIdEntity
+    public class EnglishAudio : IEntity<string>
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
